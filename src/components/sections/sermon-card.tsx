@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "@/components/ui/button"; // Corrected import path
+import Link from "next/link"; // Import Link component
 
 interface Sermon {
   image?: string;
@@ -23,13 +25,11 @@ const SermonCard: React.FC<{ sermon: Sermon }> = ({ sermon }) => {
         <p className="text-gray-600 text-sm">{new Date(sermon.date).toDateString()}</p>
         <p className="text-gray-800 font-medium">{sermon.speaker}</p>
         <p className="text-gray-700 line-clamp-3">{sermon.description}</p>
-        <a 
-          href={sermon.link} 
-          className="text-blue-500 font-medium underline mt-3 inline-block hover:text-blue-700"
-          aria-label={`Listen or watch sermon titled ${sermon.title || sermon.slug.replace(/-/g, " ")}`}
-        >
-          Listen/Watch
-        </a>
+        <Button asChild>
+          <Link href={sermon.link} aria-label={`Listen or watch sermon titled ${sermon.title || sermon.slug.replace(/-/g, " ")}`}>
+            Listen/Watch
+          </Link>
+        </Button>
       </div>
     </div>
   );

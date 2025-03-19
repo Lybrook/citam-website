@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   // Configure performance optimizations
   swcMinify: true,
   // Configure static exports
-  output: 'export',
+  // output: 'export',
   // Configure trailing slashes
   trailingSlash: true,
 };

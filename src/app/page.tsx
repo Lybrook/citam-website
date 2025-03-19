@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/sections/hero-section";
 import SermonCard from "@/components/sections/sermon-card";
 import EventCard from "@/components/sections/event-card";
@@ -15,6 +15,8 @@ interface Sermon {
   date: string;
   image: string;
   slug: string;
+  description: string; // Added description property
+  link: string; // Added link property
 }
 
 interface Event {
@@ -71,6 +73,8 @@ export default function Home(): React.ReactElement {
       date: "March 15, 2025",
       image: "/sermons/sermon1.jpg",
       slug: "walking-in-faith",
+      description: "A sermon about faith and trust in God.", // Added description
+      link: "/sermons/walking-in-faith", // Added link
     },
     {
       id: 2,
@@ -79,6 +83,8 @@ export default function Home(): React.ReactElement {
       date: "March 8, 2025",
       image: "/sermons/sermon2.jpg",
       slug: "power-of-prayer",
+      description: "Exploring the significance of prayer in our lives.", // Added description
+      link: "/sermons/power-of-prayer", // Added link
     },
     {
       id: 3,
@@ -87,6 +93,8 @@ export default function Home(): React.ReactElement {
       date: "March 1, 2025",
       image: "/sermons/sermon3.jpg",
       slug: "grace-and-mercy",
+      description: "A message on the grace and mercy of God.", // Added description
+      link: "/sermons/grace-and-mercy", // Added link
     },
   ];
 
