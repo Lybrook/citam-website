@@ -33,12 +33,11 @@ export default function HeroSection() {
   ]
 
   useEffect(() => {
-    // Auto-rotate slides every 5 seconds
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
     
-    return () => clearInterval(interval)
+    return () => clearInterval(interval) // Cleanup function to prevent memory leaks
   }, [slides.length])
 
   return (
@@ -47,7 +46,7 @@ export default function HeroSection() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-[opacity] ${
             index === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
@@ -71,9 +70,11 @@ export default function HeroSection() {
             <div className="container text-center px-4">
               <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
               <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">{slide.subtitle}</p>
-              <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white">
-                <Link href={slide.buttonLink}>{slide.buttonText}</Link>
-              </Button>
+              <Link href={slide.buttonLink}>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+                  {slide.buttonText}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -85,10 +86,11 @@ export default function HeroSection() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === currentSlide ? "bg-primary w-8" : "bg-white/50 hover:bg-white"
+            className={`w-3 h-3 rounded-full transition-all transform-gpu ${
+              index === currentSlide ? "bg-primary w-8 scale-110" : "bg-white/50 hover:bg-white scale-100 hover:scale-110"
             }`}
             aria-label={`Go to slide ${index + 1}`}
+            role="button"
           />
         ))}
       </div>

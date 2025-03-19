@@ -1,11 +1,11 @@
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import HeroSection from "@/components/sections/hero-section";
 import SermonCard from "@/components/sections/sermon-card";
 import EventCard from "@/components/sections/event-card";
 import NewsletterSignup from "@/components/sections/newsletter-signup";
-import React, { JSX } from 'react';
 
 // Define TypeScript interfaces for our data structures
 interface Sermon {
@@ -27,7 +27,41 @@ interface Event {
   slug: string;
 }
 
-export default function Home(): JSX.Element {
+interface Ministry {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  anchor: string;
+}
+
+// Component for rendering a single ministry card
+const MinistryCard: React.FC<{ ministry: Ministry }> = ({ ministry }) => (
+  <div className="ministry-card">
+    <div className="relative aspect-video">
+      <Image 
+        src={ministry.image} 
+        alt={ministry.title} 
+        fill 
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="object-cover"
+      />
+    </div>
+    <div className="p-6">
+      <h3 className="text-xl font-bold mb-2">{ministry.title}</h3>
+      <p className="mb-4">{ministry.description}</p>
+      <Button variant="link" asChild className="p-0">
+        <Link href={`/ministries#${ministry.anchor}`}>Learn More</Link>
+      </Button>
+    </div>
+  </div>
+);
+
+/**
+ * Home component for the CITAM Kitale website
+ * Displays the main landing page with various sections
+ */
+export default function Home(): React.ReactElement {
   // Sample data for the latest sermons
   const latestSermons: Sermon[] = [
     {
@@ -88,7 +122,7 @@ export default function Home(): JSX.Element {
   ];
 
   // Define ministry information for consistency
-  const ministries = [
+  const ministries: Ministry[] = [
     {
       id: 1,
       title: "Youth Ministry",
@@ -213,24 +247,7 @@ export default function Home(): JSX.Element {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {ministries.map((ministry) => (
-              <div key={ministry.id} className="ministry-card">
-                <div className="relative aspect-video">
-                  <Image 
-                    src={ministry.image} 
-                    alt={ministry.title} 
-                    fill 
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{ministry.title}</h3>
-                  <p className="mb-4">{ministry.description}</p>
-                  <Button variant="link" asChild className="p-0">
-                    <Link href={`/ministries#${ministry.anchor}`}>Learn More</Link>
-                  </Button>
-                </div>
-              </div>
+              <MinistryCard key={ministry.id} ministry={ministry} />
             ))}
           </div>
           

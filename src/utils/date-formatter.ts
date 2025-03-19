@@ -7,7 +7,7 @@
  * @param {string} options.locale - The locale to use for formatting
  * @returns {string} - Formatted date string
  */
-export function formatDate(date, { includeTime = false, locale = 'en-US' } = {}) {
+export function formatDate(date: string | Date, { includeTime = false, locale = 'en-US' } = {}) {
     try {
       const dateObj = typeof date === 'string' ? new Date(date) : date
       
@@ -15,10 +15,10 @@ export function formatDate(date, { includeTime = false, locale = 'en-US' } = {})
         return 'Invalid date'
       }
       
-      const options = {
-        weekday: 'long',
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long' as const,
         year: 'numeric',
-        month: 'long',
+        month: 'long' as const,
         day: 'numeric',
         ...(includeTime ? { hour: '2-digit', minute: '2-digit' } : {})
       }
@@ -36,7 +36,7 @@ export function formatDate(date, { includeTime = false, locale = 'en-US' } = {})
    * @param {string|Date} date - The date to format
    * @returns {string} - Relative time string
    */
-  export function getRelativeTimeString(date) {
+  export function getRelativeTimeString(date: string | Date) {
     try {
       const dateObj = typeof date === 'string' ? new Date(date) : date
       

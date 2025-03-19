@@ -1,14 +1,28 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Calendar, Clock, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { Calendar, Clock, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function EventCard({ event }) {
-  const { title, date, time, location, image, slug } = event
-  
+interface Event {
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  image: string;
+  slug: string;
+}
+
+interface EventCardProps {
+  event: Event;
+}
+
+const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  const { title, date, time, location, image, slug } = event;
+
   return (
     <div className="event-card bg-card rounded-lg overflow-hidden border border-border h-full flex flex-col">
-      <div className="relative aspect-video">
+      {/* Image Container */}
+      <div className="relative w-full h-60">
         <Image
           src={image}
           alt={title}
@@ -21,6 +35,7 @@ export default function EventCard({ event }) {
         </div>
       </div>
       
+      {/* Event Details */}
       <div className="p-4 flex-grow flex flex-col">
         <h3 className="text-xl font-bold mb-3">{title}</h3>
         
@@ -39,15 +54,22 @@ export default function EventCard({ event }) {
           <span>{location}</span>
         </div>
         
+        {/* Buttons */}
         <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-2">
-          <Button asChild className="flex-1">
-            <Link href={`/events/${slug}`}>Learn More</Link>
-          </Button>
+          <Link
+            href={`/events/${slug}`}
+            className="flex-1 bg-primary text-white px-4 py-2 rounded-lg text-center font-medium hover:bg-primary-dark"
+          >
+            View Event
+          </Link>
+
           <Button asChild variant="outline" className="flex-1">
             <Link href="/contact#calendar">Add to Calendar</Link>
           </Button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default EventCard;

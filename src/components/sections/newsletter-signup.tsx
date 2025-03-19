@@ -1,38 +1,42 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Check } from "lucide-react"
+import { Check, AlertCircle } from "lucide-react"
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  
-  const handleSubmit = async (e) => {
+  const [error, setError] = useState("")
+
+  const validateEmail = (email: string) => {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    // Simple validation
-    if (!email || !email.includes('@')) {
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address")
       return
     }
-    
+
     setIsLoading(true)
-    
-    // Simulate API call
+    setError("")
+
     setTimeout(() => {
       setIsLoading(false)
       setIsSubmitted(true)
       setEmail("")
-      
-      // Reset the success message after 5 seconds
+
       setTimeout(() => {
         setIsSubmitted(false)
       }, 5000)
     }, 1000)
-  }
-  
+  }, [email])
+
   return (
     <section className="bg-primary/10 py-16">
       <div className="container">
@@ -41,20 +45,29 @@ export default function NewsletterSignup() {
           <p className="text-lg mb-8">
             Subscribe to our newsletter to receive updates on sermons, events, and church news.
           </p>
-          
+
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-            <Input
-              type="email"
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={isLoading || isSubmitted}
-              className="flex-grow"
-            />
+            <div className="relative w-full">
+              <Input
+                type="email"
+                placeholder="Your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                aria-invalid={error ? "true" : "false"}
+                aria-describedby={error ? "email-error" : undefined}
+                disabled={isLoading || isSubmitted}
+                className="flex-grow"
+              />
+              {error && (
+                <p id="email-error" className="text-red-500 text-sm mt-2 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-1" /> {error}
+                </p>
+              )}
+            </div>
             <Button 
               type="submit" 
-              disabled={isLoading || isSubmitted}
+              aria-disabled={isLoading || isSubmitted}
               className="whitespace-nowrap"
             >
               {isLoading ? "Subscribing..." : isSubmitted ? (
@@ -65,7 +78,7 @@ export default function NewsletterSignup() {
               ) : "Subscribe"}
             </Button>
           </form>
-          
+
           <p className="text-sm text-muted-foreground mt-4">
             We respect your privacy. Unsubscribe at any time.
           </p>

@@ -1,9 +1,9 @@
-import React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-accent text-white">
       <div className="container py-16">
@@ -121,5 +121,7 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
+
+export default Footer;

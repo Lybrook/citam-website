@@ -20,8 +20,18 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "baseUrl": "./"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/layout.tsx", "src/app/page.ts", "tailwind.config.ts", "src/components/sections/sermon-card.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/layout.tsx",
+    "src/app/page.ts",
+    "tailwind.config.ts",
+    "src/components/sections/sermon-card.tsx"
+  ],
   "exclude": ["node_modules"]
 }

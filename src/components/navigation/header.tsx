@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
 
-const navItems = [
+// Define a type for navigation items
+type NavItem = {
+  name: string;
+  href: string;
+};
+
+const navItems: NavItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Sermons", href: "/sermons" },
@@ -16,37 +22,53 @@ const navItems = [
   { name: "Ministries", href: "/ministries" },
   { name: "Give", href: "/give" },
   { name: "Contact", href: "/contact" },
-  { name: "Gallery", href: "/gallery" }, // New navigation item for Gallery
+  { name: "Gallery", href: "/gallery" },
+];
 
-]
+export default function Header(): JSX.Element {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const pathname = usePathname();
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const pathname = usePathname()
+  // Memoize the scroll handler to prevent unnecessary re-renders
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 10);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    // Add scroll event listener when component mounts
+    window.addEventListener("scroll", handleScroll);
+    
+    // Check initial scroll position
+    handleScroll();
+    
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+  // Close mobile menu when pathname changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? "bg-background/95 backdrop-blur shadow-md py-2" : "bg-transparent py-4"
-    }`}>
-      <div className="container flex items-center justify-between bg-accent">
-
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-background/95 backdrop-blur shadow-md py-2" : "bg-transparent py-4"
+      }`}
+    >
+      <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png"
+            src="/assets/images/logo.png" // Fixed path to match file structure
             alt="CITAM Kitale"
             width={150}
             height={50}
             className="h-10 w-auto"
+            priority // Add priority for above-the-fold images
           />
         </Link>
 
@@ -61,6 +83,7 @@ export default function Header() {
                   ? "text-primary font-bold"
                   : "text-foreground/80 hover:text-primary"
               }`}
+              aria-current={pathname === item.href ? "page" : undefined}
             >
               {item.name}
             </Link>
@@ -76,6 +99,7 @@ export default function Header() {
             size="icon"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
             className="ml-2"
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -85,7 +109,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background border-t">
+        <nav className="md:hidden bg-background border-t" aria-label="Mobile navigation">
           <div className="container py-4 flex flex-col space-y-2">
             {navItems.map((item) => (
               <Link
@@ -96,14 +120,14 @@ export default function Header() {
                     ? "bg-primary/10 text-primary font-bold"
                     : "text-foreground/80 hover:bg-primary/5 hover:text-primary"
                 }`}
-                onClick={() => setIsMenuOpen(false)}
+                aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.name}
               </Link>
             ))}
           </div>
-        </div>
+        </nav>
       )}
     </header>
-  )
+  );
 }

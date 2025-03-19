@@ -1,67 +1,67 @@
-import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
-export default {
-      // Enable dark mode
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ["class"],
-  // Configure content sources
+  safelist: ["dark"],
+  prefix: "",
+
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
+
   theme: {
-    // Configure container
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
-      // Configure colors based on the church's theme
       colors: {
-        // Red, white, and black theme
-        primary: "#E30613", // Red
-        secondary: "#FFFFFF", // White
-        accent: "#000000", // Black
-        
-        // Default colors for shadcn
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        
-        // Theme colors
-        "theme-red": {
-          DEFAULT: "#E30613",
-          50: "#FFCDD2",
-          100: "#EF9A9A",
-          200: "#E57373",
-          300: "#EF5350",
-          400: "#F44336",
-          500: "#E30613",
-          600: "#D32F2F",
-          700: "#C62828",
-          800: "#B71C1C",
-          900: "#8B0000",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
-      // Configure fonts
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        heading: ["var(--font-heading)", ...fontFamily.sans],
-      },
-      // Configure border radius
       borderRadius: {
+        xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      // Configure keyframes
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
@@ -71,13 +71,22 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "collapsible-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-collapsible-content-height)" },
+        },
+        "collapsible-up": {
+          from: { height: "var(--radix-collapsible-content-height)" },
+          to: { height: 0 },
+        },
       },
-      // Configure animations
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "collapsible-down": "collapsible-down 0.2s ease-in-out",
+        "collapsible-up": "collapsible-up 0.2s ease-in-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [animate],
+};

@@ -1,0 +1,76 @@
+📁 src
+├── 📁 app
+│   ├── 📄 layout.tsx
+│   ├── 📄 page.tsx
+│   ├── 📄 globals.css
+│   ├── 📁 about
+│   │   └── 📄 page.tsx
+│   ├── 📁 sermons
+│   │   └── 📄 page.tsx
+│   ├── 📁 events
+│   │   └── 📄 page.tsx
+│   ├── 📁 ministries
+│   │   └── 📄 page.tsx
+│   ├── 📁 give
+│   │   └── 📄 page.tsx
+│   └── 📁 contact
+│       └── 📄 page.tsx
+├── 📁 assets
+│   ├── 📁 images
+│   │   ├── 📄 logo.png
+│   │   ├── 📄 hero-background.jpg
+│   │   ├── 📄 pastor.jpg
+│   │   └── 📄 church-building.jpg
+│   ├── 📁 fonts
+│   │   └── 📄 custom-font.woff2
+│   └── 📁 styles
+│       └── 📄 custom-styles.css
+├── 📁 components
+│   ├── 📁 ui
+│   │   ├── 📄 button.tsx
+│   │   ├── 📄 card.tsx
+│   │   ├── 📄 dropdown.tsx
+│   │   └── 📄 theme-toggle.tsx
+│   ├── 📁 navigation
+│   │   ├── 📄 header.tsx
+│   │   ├── 📄 footer.tsx
+│   │   └── 📄 mobile-menu.tsx
+│   └── 📁 sections
+│       ├── 📄 hero-section.tsx
+│       ├── 📄 sermon-card.tsx
+│       ├── 📄 event-card.tsx
+│       └── 📄 newsletter-signup.tsx
+├── 📁 features
+│   ├── 📁 sermons
+│   │   ├── 📄 sermon-grid.tsx
+│   │   └── 📄 sermon-player.tsx
+│   ├── 📁 events
+│   │   ├── 📄 event-list.tsx
+│   │   └── 📄 event-calendar.tsx
+│   └── 📁 ministries
+│       └── 📄 ministry-grid.tsx
+├── 📁 hooks
+│   ├── 📄 use-theme.tsx
+│   └── 📄 use-scroll.tsx
+├── 📁 layouts
+│   ├── 📄 main-layout.tsx
+│   └── 📄 section-layout.tsx
+├── 📁 pages
+│   ├── 📄 index.tsx
+│   ├── 📄 about.tsx
+│   ├── 📄 sermons.tsx
+│   ├── 📄 events.tsx
+│   ├── 📄 ministries.tsx
+│   ├── 📄 give.tsx
+│   └── 📄 contact.tsx
+├── 📁 services
+│   ├── 📄 api.tsx
+│   └── 📄 image-optimization.tsx
+├── 📁 store
+│   ├── 📄 theme-context.tsx
+│   └── 📄 event-store.tsx
+├── 📁 styles
+│   └── 📄 tailwind.css
+└── 📁 utils
+    ├── 📄 date-formatter.tsx
+    └── 📄 image-loader.tsx
