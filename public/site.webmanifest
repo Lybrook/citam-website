@@ -1,0 +1,16 @@
+{
+  "name": "CITAM Kitale",
+  "short_name": "CITAM",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

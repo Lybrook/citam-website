@@ -16,6 +16,8 @@ export function ThemeProvider({
     <NextThemesProvider
       attribute="class"
       defaultTheme="system"
+
+
       enableSystem
       {...props}
     >

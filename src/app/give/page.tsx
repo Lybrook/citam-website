@@ -2,7 +2,6 @@
 
 import React, { useState, FormEvent } from 'react';
 import Header from '../../components/navigation/header';
-import Footer from '../../components/navigation/footer';
 
 const GivePage: React.FC = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -77,7 +76,6 @@ const GivePage: React.FC = () => {
           </form>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

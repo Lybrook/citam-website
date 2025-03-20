@@ -40,17 +40,31 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>( 
-  ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant = "default",
+      size = "default",
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
+    // Ensure consistent rendering by handling server/client branching
+    const isClient = typeof window !== "undefined";
 
-    console.log("Button Props:", { variant, size, className }); // Debugging log
+    // Use a consistent fallback for any client-only logic
     const Comp = asChild ? Slot : "button";
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {isClient ? props.children : null}
+      </Comp>
     );
   }
 );

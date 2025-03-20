@@ -68,9 +68,9 @@ export const metadata = {
 // Root layout component with proper TypeScript typing
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
           <main className="pt-16 min-h-screen">{children}</main>
           <Footer />

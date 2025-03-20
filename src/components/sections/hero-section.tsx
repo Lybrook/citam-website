@@ -6,25 +6,26 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0) // Initialize to 0 for consistency
+
   
   const slides = [
     {
-      image: "/hero/hero1.jpg",
+      image: "/Pasii1.jpg",
       title: "Welcome to CITAM Kitale",
       subtitle: "A place to belong, believe, and become",
       buttonText: "Plan Your Visit",
       buttonLink: "/contact"
     },
     {
-      image: "/hero/hero2.jpg",
+      image: "/IMG_9960.jpg",
       title: "Join Us This Sunday",
       subtitle: "8:00 AM & 10:30 AM Services",
       buttonText: "View Schedule",
       buttonLink: "/about#schedule"
     },
     {
-      image: "/hero/hero3.jpg",
+      image: "/Don1.jpg",
       title: "Grow in Your Faith",
       subtitle: "Connect with a community that cares",
       buttonText: "Join a Group",
@@ -33,7 +34,8 @@ export default function HeroSection() {
   ]
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval(() => { 
+
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
     
@@ -43,7 +45,8 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
       {/* Slides */}
-      {slides.map((slide, index) => (
+      {slides.map((slide, index) => ( 
+
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-[opacity] ${
@@ -71,7 +74,8 @@ export default function HeroSection() {
               <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
               <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">{slide.subtitle}</p>
               <Link href={slide.buttonLink}>
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" variant="default">
+
                   {slide.buttonText}
                 </Button>
               </Link>
@@ -82,7 +86,8 @@ export default function HeroSection() {
       
       {/* Slide indicators */}
       <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center space-x-2">
-        {slides.map((_, index) => (
+      {slides.map((_, index) => ( 
+
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}

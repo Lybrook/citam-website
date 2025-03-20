@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../../components/navigation/header';
-import Footer from '../../components/navigation/footer';
 
 interface Ministry {
   id: number;
@@ -52,7 +51,6 @@ const MinistriesPage: React.FC = () => {
           </ul>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

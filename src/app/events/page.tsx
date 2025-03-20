@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../../components/navigation/header';
-import Footer from '../../components/navigation/footer';
 
 interface Event {
   id: number;
@@ -58,7 +57,6 @@ const EventsPage: React.FC = () => {
           </ul>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

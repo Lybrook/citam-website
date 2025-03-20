@@ -31,7 +31,8 @@ const SermonCard: React.FC<{ sermon: Sermon }> = ({ sermon }) => {
         <p className="text-gray-600 text-sm">{formattedDate}</p>
         <p className="text-gray-800 font-medium">{sermon.speaker}</p>
         <p className="text-gray-700 line-clamp-3">{sermon.description}</p>
-        <Button asChild>
+        <Button asChild variant="default">
+
           <Link href={sermon.link} aria-label={`Listen or watch sermon titled ${formattedTitle}`}>
             Listen/Watch
           </Link>

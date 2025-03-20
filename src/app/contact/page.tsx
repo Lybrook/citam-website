@@ -1,7 +1,6 @@
 "use client"
 import React from 'react';
 import Header from '../../components/navigation/header';
-import Footer from '../../components/navigation/footer';
 
 const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,7 +60,6 @@ const ContactPage: React.FC = () => {
           </form>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

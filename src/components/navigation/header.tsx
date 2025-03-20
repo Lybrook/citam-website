@@ -28,6 +28,8 @@ const navItems: NavItem[] = [
 export default function Header(): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
+
+
   const pathname = usePathname();
 
   // Memoize the scroll handler to prevent unnecessary re-renders
@@ -36,11 +38,17 @@ export default function Header(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    // Add scroll event listener when component mounts
-    window.addEventListener("scroll", handleScroll);
+    // Add scroll event listener when component mounts, but only if the window is defined
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+    } // Added closing bracket here
+    
+
+
     
     // Check initial scroll position
-    handleScroll();
+    setScrolled(window.scrollY > 10);
+
     
     // Remove event listener when component unmounts
     return () => {
