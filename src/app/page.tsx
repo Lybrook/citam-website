@@ -1,11 +1,11 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import HeroSection from "@/components/sections/hero-section";
-import SermonCard from "@/components/sections/sermon-card";
-import EventCard from "@/components/sections/event-card";
-import NewsletterSignup from "@/components/sections/newsletter-signup";
+import { Button } from "../components/ui/button";
+import HeroSection from "../components/sections/hero-section";
+import SermonCard from "../components/sections/sermon-card";
+import EventCard from "../components/sections/event-card";
+import NewsletterSignup from "../components/sections/newsletter-signup";
 
 // Define TypeScript interfaces for our data structures
 interface Sermon {
@@ -171,8 +171,7 @@ export default function Home(): React.ReactElement {
                 make Him known through worship, fellowship, and service.
               </p>
               <p className="text-lg mb-6">
-                Whether you're exploring faith for the first time or looking for a church to call home, 
-                we invite you to join us this Sunday for an inspiring message and heartfelt worship experience.
+                Whether you are exploring faith for the first time or looking for a church to call home, we invite you to join us this Sunday for an inspiring message and heartfelt worship experience.&apos;
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg">
@@ -201,7 +200,7 @@ export default function Home(): React.ReactElement {
       <section className="page-section bg-primary/5">
         <div className="container">
           <div className="verse-block max-w-3xl mx-auto text-center">
-            <p className="text-2xl md:text-3xl">"For where two or three gather in my name, there am I with them."</p>
+            <p className="text-2xl md:text-3xl">&quot;For where two or three gather in my name, there am I with them.&apos;&quot;</p>
             <p className="text-right font-bold mt-4">Matthew 18:20</p>
           </div>
         </div>

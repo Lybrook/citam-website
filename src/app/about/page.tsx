@@ -21,7 +21,7 @@ const AboutPage: React.FC = () => {
             A community transformed by the gospel, living in the fullness of Christ.
           </p>
           <h2 className="text-2xl font-semibold mb-2">Testimonials</h2>
-          <p className="mb-4">"CITAM Kitale has been a blessing to my life!" - Community Member</p>
+          <p className="mb-4">&quot;CITAM Kitale has been a blessing to my life!&quot; - Community Member</p>
         </section>
       </main>
       <Footer />

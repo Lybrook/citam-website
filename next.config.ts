@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  metadataBase: new URL("http://localhost:3000"), // Set the base URL for metadata
   images: {
     // Configure image optimization for better performance
     domains: ['localhost'],
@@ -14,7 +15,6 @@ const nextConfig: NextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
   // Configure performance optimizations
-  swcMinify: true,
   // Configure static exports
   // output: 'export',
   // Configure trailing slashes

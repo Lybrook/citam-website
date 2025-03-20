@@ -23,6 +23,7 @@ export const metadata = {
   keywords: "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
   authors: [{ name: "CITAM Kitale" }],
   creator: "CITAM Kitale",
+  metadataBase: new URL("http://localhost:3000"), // Set the base URL for metadata
   openGraph: {
     title: "CITAM Kitale | Christ is The Answer Ministries",
     description: "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",

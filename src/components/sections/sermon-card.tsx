@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "@/components/ui/button"; // Corrected import path
-import Link from "next/link"; // Import Link component
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Sermon {
   image?: string;
@@ -13,20 +14,25 @@ interface Sermon {
 }
 
 const SermonCard: React.FC<{ sermon: Sermon }> = ({ sermon }) => {
+  const formattedDate = new Date(sermon.date).toDateString();
+  const formattedTitle = sermon.title || sermon.slug.replace(/-/g, " ");
+
   return (
-    <div className="sermon-card border rounded-lg shadow-lg overflow-hidden bg-white transition-transform duration-300 hover:scale-105">
-      <img
-        src={sermon.image || "/placeholder.jpg"} 
-        alt={sermon.title || sermon.slug.replace(/-/g, " ")}
+    <div className="flex flex-col">
+      <Image
+        src={sermon.image || "/placeholder.jpg"}
+        alt={formattedTitle}
+        width={500}
+        height={192}
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold capitalize">{sermon.title || sermon.slug.replace(/-/g, " ")}</h2>
-        <p className="text-gray-600 text-sm">{new Date(sermon.date).toDateString()}</p>
+        <h2 className="text-xl font-semibold capitalize">{formattedTitle}</h2>
+        <p className="text-gray-600 text-sm">{formattedDate}</p>
         <p className="text-gray-800 font-medium">{sermon.speaker}</p>
         <p className="text-gray-700 line-clamp-3">{sermon.description}</p>
         <Button asChild>
-          <Link href={sermon.link} aria-label={`Listen or watch sermon titled ${sermon.title || sermon.slug.replace(/-/g, " ")}`}>
+          <Link href={sermon.link} aria-label={`Listen or watch sermon titled ${formattedTitle}`}>
             Listen/Watch
           </Link>
         </Button>
