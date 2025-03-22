@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Badge } from "../ui/badge"; // Adjusted the path to match the relative structure
 
 interface Event {
   title: string;
@@ -10,6 +12,7 @@ interface Event {
   location: string;
   image: string;
   slug: string;
+  description?: string;
 }
 
 interface EventCardProps {
@@ -17,58 +20,115 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const { title, date, time, location, image, slug } = event;
+  const { title, date, time, location, image, slug, description } = event;
 
   return (
-    <div className="event-card bg-card rounded-lg overflow-hidden border border-border h-full flex flex-col">
-      {/* Image Container */}
-      <div className="relative w-full h-60">
+    <Card className="h-full flex flex-col overflow-hidden border-red-800 border-2 hover:shadow-lg transition-shadow duration-300">
+      {/* Image Container with optimized next/image */}
+      <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={image}
-          alt={title}
+          alt={`${title} - Church event on ${date}`}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 hover:scale-105"
+          priority={false}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+          onError={(e) => {
+            e.currentTarget.src = "/fallback-image.jpg"; // Fallback image for invalid URLs
+          }}
         />
-        <div className="absolute top-2 left-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+        <Badge className="absolute top-2 left-2 bg-red-700 hover:bg-red-800 text-white">
           Upcoming
-        </div>
+        </Badge>
       </div>
-      
+
       {/* Event Details */}
-      <div className="p-4 flex-grow flex flex-col">
-        <h3 className="text-xl font-bold mb-3">{title}</h3>
-        
-        <div className="flex items-center text-sm text-muted-foreground mb-2">
-          <Calendar className="w-4 h-4 mr-2 text-primary" />
-          <span>{date}</span>
+      <CardHeader className="pb-2">
+        <h3
+          className="text-xl font-bold text-black tracking-tight line-clamp-2"
+          title={title}
+        >
+          {title}
+        </h3>
+        {description && (
+          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+        )}
+      </CardHeader>
+
+      <CardContent className="pb-2 flex-grow">
+        <div className="space-y-3">
+          <div className="flex items-center text-sm">
+            <Calendar className="w-4 h-4 mr-2 text-red-700" />
+            <span className="text-gray-800">{date}</span>
+          </div>
+
+          <div className="flex items-center text-sm">
+            <Clock className="w-4 h-4 mr-2 text-red-700" />
+            <span className="text-gray-800">{time}</span>
+          </div>
+
+          <div className="flex items-center text-sm">
+            <MapPin className="w-4 h-4 mr-2 text-red-700" />
+            <span className="text-gray-800 line-clamp-1" title={location}>
+              {location}
+            </span>
+          </div>
         </div>
-        
-        <div className="flex items-center text-sm text-muted-foreground mb-2">
-          <Clock className="w-4 h-4 mr-2 text-primary" />
-          <span>{time}</span>
-        </div>
-        
-        <div className="flex items-center text-sm text-muted-foreground mb-4">
-          <MapPin className="w-4 h-4 mr-2 text-primary" />
-          <span>{location}</span>
-        </div>
-        
-        {/* Buttons */}
-        <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-2">
+      </CardContent>
+
+      {/* Buttons */}
+      <CardFooter className="pt-4 gap-2 flex flex-col sm:flex-row">
+        <Button
+          asChild
+          className="flex-1 bg-red-700 hover:bg-red-800 text-white border-none"
+        >
           <Link
             href={`/events/${slug}`}
-            className="flex-1 bg-primary text-white px-4 py-2 rounded-lg text-center font-medium hover:bg-primary-dark"
+            aria-label={`View details for ${title} event`}
           >
             View Event
           </Link>
+        </Button>
 
-          <Button asChild variant="outline" className="flex-1">
-            <Link href="/contact#calendar">Add to Calendar</Link>
-          </Button>
-        </div>
-      </div>
-    </div>
+        <Button
+          asChild
+          variant="outline"
+          className="flex-1 border-red-700 text-red-700 hover:bg-red-50 hover:text-red-800"
+        >
+          <Link
+            href="/contact#calendar"
+            aria-label={`Add ${title} to your calendar`}
+          >
+            Add to Calendar
+          </Link>
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="hidden sm:flex text-red-700 hover:bg-red-50 hover:text-red-800"
+          aria-label={`Share ${title} event`}
+          onClick={() => {
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: title,
+                  text: `Check out this event: ${title}`,
+                  url: `${window.location.origin}/events/${slug}`, // Ensure full URL
+                })
+                .catch((error) => console.error("Error sharing:", error)); // Handle errors
+            } else {
+              alert("Sharing is not supported on this browser."); // Fallback for unsupported browsers
+            }
+          }}
+        >
+          <Share2 className="w-4 h-4" />
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
