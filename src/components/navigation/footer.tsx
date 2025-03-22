@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           {/* Column 1 - About */}
           <div>
             <Image
-              src="/logo-white.png"
+              src="/logo.png"
               alt="CITAM Kitale"
               width={150}
               height={50}

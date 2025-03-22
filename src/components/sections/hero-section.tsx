@@ -11,21 +11,21 @@ export default function HeroSection() {
   
   const slides = [
     {
-      image: "/Pasii1.jpg",
+      image: "/citamKitale2.jpg",
       title: "Welcome to CITAM Kitale",
       subtitle: "A place to belong, believe, and become",
       buttonText: "Plan Your Visit",
       buttonLink: "/contact"
     },
     {
-      image: "/IMG_9960.jpg",
+      image: "/pastor.jpg",
       title: "Join Us This Sunday",
       subtitle: "8:00 AM & 10:30 AM Services",
       buttonText: "View Schedule",
       buttonLink: "/about#schedule"
     },
     {
-      image: "/Don1.jpg",
+      image: "/yearsTheme.jpg",
       title: "Grow in Your Faith",
       subtitle: "Connect with a community that cares",
       buttonText: "Join a Group",

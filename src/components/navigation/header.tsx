@@ -71,7 +71,7 @@ export default function Header(): JSX.Element {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/assets/images/logo.png" // Fixed path to match file structure
+            src="/logo.png" // Fixed path to match file structure
             alt="CITAM Kitale"
             width={150}
             height={50}

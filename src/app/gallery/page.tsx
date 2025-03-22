@@ -1,10 +1,61 @@
 import React from 'react';
+import Image from 'next/image';
+
+const images = [
+  '/childrenMinistry.jpg',
+  '/citamKitale1.jpg',
+  '/citamKitale2.jpg',
+  '/ctamKitale.jpg',
+  '/Don.jpg',
+  '/Don1.jpg',
+  '/Guesssst1.JPG',
+  '/Guessst1.JPG',
+  '/Guesst1.JPG',
+  '/Guest1.jpg',
+  '/Guest2.jpg',
+  '/Guest4.jpg',
+  '/Guest5.jpg',
+  '/IMG_9960.jpg',
+  '/IMG_9965.jpg',
+  '/inStepWithTheSpirit.jpg',
+  '/Kwama.JPG',
+  '/Kwama1.JPG',
+  '/Kwama2.JPG',
+  '/logo.jpg',
+  '/menMinistry.jpg',
+  '/Opiyo1.jpg',
+  '/Opiyo2.jpg',
+  '/Opiyo3.jpg',
+  '/Pasii1.jpg',
+  '/Pasii2.jpg',
+  '/Pasii3.jpg',
+  '/Pasii4.jpg',
+  '/Pasii5.jpg',
+  '/Pasii6.jpg',
+  '/Pasii7.jpg',
+  '/Pasii8.JPG',
+  '/pastor.jpg',
+  '/pastor2.jpg',
+  '/powerOfPrayer.jpg',
+  '/powerOfPrayer1.jpg',
+  '/walkingInFaith.jpg',
+  '/Wife1.jpg',
+  '/yearsTheme.png',
+  '/youthMinistry.jpg',
+];
 
 const GalleryPage: React.FC = () => {
   return (
-    <div>
+    <div className="gallery-container">
       <h1>Gallery</h1>
       <p>This is the Gallery page.</p>
+      <div className="image-grid">
+        {images.map((image, index) => (
+          <div key={index} className="image-container">
+            <Image src={image} alt={`Gallery image ${index + 1}`} width={500} height={500} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

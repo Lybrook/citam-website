@@ -1,29 +1,335 @@
 import React from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 import Header from '../../components/navigation/header';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent } from '../../components/ui/card';
+
+// Testimonial interface
+interface Testimonial {
+  id: number;
+  quote: string;
+  author: string;
+  role: string;
+  image?: string;
+}
+
+// Leadership interface
+interface Leader {
+  id: number;
+  name: string;
+  position: string;
+  image: string;
+  bio: string;
+}
 
 const AboutPage: React.FC = () => {
+  // Sample testimonials data
+  const testimonials: Testimonial[] = [
+    {
+      id: 1,
+      quote: "CITAM Kitale has been a blessing to my family. The children's ministry has helped my kids grow spiritually, and the worship experience is always uplifting.",
+      author: "Sarah Kimani",
+      role: "Member since 2021",
+      image: "/testimonials/sarah.jpg"
+    },
+    {
+      id: 2,
+      quote: "I found my purpose through serving in the youth ministry at CITAM Kitale. The community here is welcoming and supportive in every way.",
+      author: "James Ochieng",
+      role: "Youth Ministry Leader",
+      image: "/testimonials/james.jpg"
+    },
+    {
+      id: 3,
+      quote: "The biblical teaching at CITAM Kitale has transformed my understanding of faith. I've grown so much since joining this church.",
+      author: "Mary Wanjiru",
+      role: "Member since 2019",
+      image: "/testimonials/mary.jpg"
+    }
+  ];
+
+  // Sample leadership data
+  const leadership: Leader[] = [
+    {
+      id: 1,
+      name: "Rev. Joseph Kamau",
+      position: "Senior Pastor",
+      image: "/leadership/pastor.jpg",
+      bio: "Rev. Joseph Kamau has been leading CITAM Kitale since 2018. He has a passion for teaching God's Word and mentoring leaders."
+    },
+    {
+      id: 2,
+      name: "Agnes Mwangi",
+      position: "Children's Ministry Director",
+      image: "/leadership/childrens-director.jpg",
+      bio: "Agnes oversees our vibrant children's ministry, ensuring that children learn about God's love in a fun and safe environment."
+    },
+    {
+      id: 3,
+      name: "David Kiprop",
+      position: "Worship Director",
+      image: "/leadership/worship-director.jpg",
+      bio: "David leads our worship team with a focus on creating authentic worship experiences that glorify God."
+    }
+  ];
+
+  // SEO metadata
+  const pageTitle = "About CITAM Kitale | Our Mission, Vision & Leadership";
+  const pageDescription = "Learn about CITAM Kitale's mission, vision, values, and the leadership team serving our church community in Kitale, Kenya.";
+
   return (
     <>
-      <Header />
-      <main className="pt-16 min-h-screen">
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content="CITAM Kitale, about us, church mission, church vision, church leadership, Pentecostal church, Kitale" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content="/church-building.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <link rel="canonical" href="https://citamkitale.org/about" />
+      </Head>
 
-        <section className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-4">About CITAM Kitale</h1>
-          <p className="mb-4">
-            CITAM Kitale is a vibrant church committed to spreading the gospel of Jesus Christ and serving the community.
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative bg-black text-white py-24">
+        <div className="absolute inset-0 opacity-60">
+          <Image 
+            src="/about-hero.jpg" 
+            alt="CITAM Kitale Church Community" 
+            fill
+            className="object-cover"
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTExIi8+PC9zdmc+"
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">About <span className="text-red-500">CITAM Kitale</span></h1>
+          <div className="h-1 w-24 bg-red-600 mb-6"></div>
+          <p className="text-lg md:text-xl max-w-2xl">
+            Welcome to Christ is The Answer Ministries Kitale, where we strive to know God and make Him known through evangelism and discipleship.
           </p>
-          <h2 className="text-2xl font-semibold mb-2">Our Mission</h2>
-          <p className="mb-4">
-            To reach out to the community with the love of Christ and to make disciples of all nations.
+        </div>
+      </section>
+
+      {/* Our Story Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6 text-black">Our <span className="text-red-600">Story</span></h2>
+              <div className="h-1 w-16 bg-red-600 mb-6"></div>
+              <p className="text-gray-800 mb-4">
+                CITAM Kitale began as a small gathering of believers committed to sharing God&apos;s love in the Kitale region. 
+                Over the years, we&apos;ve grown into a vibrant community of faith that impacts countless lives through various ministries and outreach programs.
+              </p>
+              <p className="text-gray-800 mb-4">
+                Our church has been blessed with dedicated leadership and passionate members who work together to fulfill our mission 
+                of knowing God and making Him known through evangelism and discipleship.
+              </p>
+              <p className="text-gray-800">
+                Today, CITAM Kitale continues to grow as we remain committed to our calling, serving the community, 
+                and providing a spiritual home for people from all walks of life.
+              </p>
+            </div>
+            <div className="relative rounded-lg overflow-hidden shadow-xl h-96">
+              <Image
+                src="/church-history.jpg"
+                alt="CITAM Kitale History"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission, Vision, Values Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3 text-black">Our <span className="text-red-600">Mission & Vision</span></h2>
+            <div className="h-1 w-24 bg-red-600 mx-auto mb-6"></div>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Guided by our faith in Christ and led by the Holy Spirit, we are committed to the following mission and vision.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Mission Card */}
+            <Card className="shadow-lg border-t-4 border-red-600 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-4 text-black">Our Mission</h3>
+                <p className="text-gray-700 mb-4">
+                  To know God and to make Him known through evangelism and discipleship.
+                </p>
+                <div className="h-1 w-12 bg-red-600"></div>
+              </CardContent>
+            </Card>
+
+            {/* Vision Card */}
+            <Card className="shadow-lg border-t-4 border-red-600 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-4 text-black">Our Vision</h3>
+                <p className="text-gray-700 mb-4">
+                  A community of Believers Impacting the World with the Gospel of our Lord Jesus Christ through the transforming Power of the Holy Spirit.
+                </p>
+                <div className="h-1 w-12 bg-red-600"></div>
+              </CardContent>
+            </Card>
+
+            {/* Who We Are Card */}
+            <Card className="shadow-lg border-t-4 border-red-600 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-4 text-black">Who We Are</h3>
+                <ul className="text-gray-700 space-y-2">
+                  <li>• A Pentecostal Church totally submitted to the Blessed Holy Spirit</li>
+                  <li>• An English speaking Church targeting the urban populace</li>
+                  <li>• Missions oriented, with an outreach to the wider community</li>
+                  <li>• A community of believers, open to people of all tribes and races</li>
+                  <li>• A Church with a holistic ministry approach</li>
+                </ul>
+                <div className="h-1 w-12 bg-red-600 mt-4"></div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3 text-black">Our <span className="text-red-600">Leadership</span></h2>
+            <div className="h-1 w-24 bg-red-600 mx-auto mb-6"></div>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Meet the dedicated team that guides our church community with wisdom, faith, and compassion.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {leadership.map((leader) => (
+              <Card key={leader.id} className="overflow-hidden shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                <div className="relative h-64">
+                  <Image 
+                    src={leader.image} 
+                    alt={leader.name} 
+                    fill 
+                    className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
+                  />
+                </div>
+                <CardContent className="p-6 border-t-2 border-red-600">
+                  <h3 className="text-xl font-bold mb-1 text-black">{leader.name}</h3>
+                  <p className="text-red-600 font-medium mb-3">{leader.position}</p>
+                  <p className="text-gray-700">{leader.bio}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 bg-black text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3">Our <span className="text-red-500">Testimonials</span></h2>
+            <div className="h-1 w-24 bg-red-600 mx-auto mb-6"></div>
+            <p className="text-gray-300 max-w-3xl mx-auto">
+              Hear from members of our church community about how CITAM Kitale has impacted their lives.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.id} className="bg-gray-900 text-white border-none shadow-xl">
+                <CardContent className="p-6">
+                  <div className="mb-4 text-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-300 italic mb-6">{testimonial.quote}</p>
+                  <div className="flex items-center">
+                    {testimonial.image && (
+                      <div className="mr-4 relative w-12 h-12 rounded-full overflow-hidden">
+                        <Image 
+                          src={testimonial.image} 
+                          alt={testimonial.author} 
+                          fill 
+                          className="object-cover" 
+                          sizes="48px"
+                          placeholder="blur"
+                          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiM1NTUiLz48L3N2Zz4="
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-bold">{testimonial.author}</p>
+                      <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Join Us Section */}
+      <section className="py-16 bg-red-600 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            We invite you to join us for Sunday worship and become part of our church family. 
+            Experience the love of Christ and the joy of fellowship with believers.
           </p>
-          <h2 className="text-2xl font-semibold mb-2">Our Vision</h2>
-          <p className="mb-4">
-            A community transformed by the gospel, living in the fullness of Christ.
-          </p>
-          <h2 className="text-2xl font-semibold mb-2">Testimonials</h2>
-          <p className="mb-4">&quot;CITAM Kitale has been a blessing to my life!&quot; - Community Member</p>
-        </section>
-      </main>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button asChild size="lg" className="bg-white text-red-600 hover:bg-gray-100">
+              <Link href="/services">Service Times</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-red-700">
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Structured data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "Church",
+              "name": "CITAM Kitale",
+              "alternateName": "Christ is The Answer Ministries Kitale",
+              "description": "A Pentecostal Church dedicated to sharing the love of Christ and making disciples in Kitale and beyond.",
+              "mission": "To know God and to make Him known through evangelism and discipleship.",
+              "founder": {
+                "@type": "Person",
+                "name": "Rev. Joseph Kamau",
+                "jobTitle": "Senior Pastor"
+              }
+            }
+          })
+        }}
+      />
     </>
   );
 };
