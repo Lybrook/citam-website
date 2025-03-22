@@ -258,7 +258,7 @@ export default function Home(): React.ReactElement {
             </div>
             <div className='relative aspect-video rounded-lg overflow-hidden shadow-xl'>
               <Image
-                src='/church-building.jpg'
+                src='/churchKitale1.jpg'
                 alt='CITAM Kitale Church Building'
                 fill
                 sizes='(max-width: 768px) 100vw, 50vw'
@@ -317,7 +317,7 @@ export default function Home(): React.ReactElement {
           <h2 className='text-3xl font-bold mb-3 text-center text-black'>
             Upcoming <span className='text-red-600'>Events</span>
           </h2>
-          <p className='text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto'>
+          <p className='text-lg text-gray-600 text-center mb-10 max-wa-2xl mx-auto'>
             Join us for these special gatherings and activities as we grow
             together in faith and fellowship.
           </p>

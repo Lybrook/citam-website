@@ -1,12 +1,12 @@
 import { Inter, Roboto_Slab } from "next/font/google";
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 import "./globals.css";
 import Header from "@/components/navigation/header";
 import Footer from "@/components/navigation/footer";
-import { ThemeProvider} from "@/components/ui/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 // Configure fonts
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -19,14 +19,17 @@ const roboto_slab = Roboto_Slab({
 // Define metadata for the application
 export const metadata = {
   title: "CITAM Kitale | Christ is The Answer Ministries",
-  description: "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
-  keywords: "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
+  description:
+    "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
+  keywords:
+    "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
   authors: [{ name: "CITAM Kitale" }],
   creator: "CITAM Kitale",
   metadataBase: new URL("http://localhost:3000"), // Set the base URL for metadata
   openGraph: {
     title: "CITAM Kitale | Christ is The Answer Ministries",
-    description: "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
+    description:
+      "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
     url: "https://citamkitale.org",
     siteName: "CITAM Kitale",
     images: [
@@ -43,7 +46,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "CITAM Kitale | Christ is The Answer Ministries",
-    description: "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
+    description:
+      "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
     images: ["/twitter-image.jpg"],
   },
   robots: {
@@ -68,11 +72,13 @@ export const metadata = {
 // Root layout component with proper TypeScript typing
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+    <html lang='en'>
+      <body
+        className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
+      >
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Header />
-          <main className="pt-16 min-h-screen">{children}</main>
+          <main className='pt-16 min-h-screen'>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

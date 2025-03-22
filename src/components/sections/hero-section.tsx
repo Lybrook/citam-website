@@ -25,7 +25,7 @@ export default function HeroSection() {
       buttonLink: "/about#schedule"
     },
     {
-      image: "/yearsTheme.jpg",
+      image: "/yearsTheme.png",
       title: "Grow in Your Faith",
       subtitle: "Connect with a community that cares",
       buttonText: "Join a Group",
