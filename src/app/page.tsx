@@ -1,25 +1,24 @@
 // @/src/app/page.tsx
 import React from 'react';
 import Head from "next/head";
-import HeroSection from "@/components/sections/hero-section";
-import SermonCard from "@/components/sections/sermon-card";
-import EventCard from "@/components/sections/event-card";
-import NewsletterSignup from "@/components/sections/newsletter-signup";
-import { Button } from "@/components/ui/button";
+import HeroSection from "/components/sections/hero-section";
+import SermonCard from "/components/sections/sermon-card";
+import EventCard from "/components/sections/event-card";
+import NewsletterSignup from "/components/sections/newsletter-signup";
+import { Button } from "/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 
 // Import data
-import { latestSermons } from "@/app/data/sermons";
-import { upcomingEvents } from "@/app/data/events";
-import { ministries } from "@/app/data/ministries";
+import { latestSermons } from "/app/data/sermons";
+import { upcomingEvents } from "/app/data/events";
+import { ministries } from "/app/data/ministries";
 
 // Import components
-import MinistryCard from "@/components/MinistryCard";
-import ServiceTimesBanner from "@/components/sections/service-times-banner";
-import WelcomeSection from "@/components/sections/welcome-section";
-import BibleVerseSection from "@/components/sections/bible-verse-section";
-import TestimonialSection from "@/components/sections/testimonial-section";
+import MinistryCard from "/components/MinistryCard";
+import ServiceTimesBanner from "/components/sections/service-times-banner";
+import WelcomeSection from "/components/sections/welcome-section";
+import BibleVerseSection from "/components/sections/bible-verse-section";
+import TestimonialSection from "/components/sections/testimonials";
 
 export default function Home() {
   // SEO metadata
@@ -49,7 +48,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {latestSermons.map((sermon) => (
-              <SermonCard key={sermon.id} {...sermon} />
+              <SermonCard key={sermon.id} sermon={sermon} />
             ))}
           </div>
           
@@ -71,7 +70,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {upcomingEvents.map((event) => (
-              <EventCard key={event.id} {...event} />
+              <EventCard key={event.id} event={event} />
             ))}
           </div>
           
