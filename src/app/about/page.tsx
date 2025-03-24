@@ -5,77 +5,12 @@ import Link from 'next/link';
 import Header from '../../components/navigation/header';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
-
-// Testimonial interface
-interface Testimonial {
-  id: number;
-  quote: string;
-  author: string;
-  role: string;
-  image?: string;
-}
-
-// Leadership interface
-interface Leader {
-  id: number;
-  name: string;
-  position: string;
-  image: string;
-  bio: string;
-}
+import { testimonials } from '../data/testimonials';
+import { leadership } from '../data/leadership'; // Updated import
+import LeadershipCard from '../../components/LeadershipCard';
+import TestimonialCard from '../../components/TestimonialCard';
 
 const AboutPage: React.FC = () => {
-  // Sample testimonials data
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      quote: "CITAM Kitale has been a blessing to my family. The children's ministry has helped my kids grow spiritually, and the worship experience is always uplifting.",
-      author: "Sarah Kimani",
-      role: "Member since 2021",
-      image: "/testimonials/sarah.jpg"
-    },
-    {
-      id: 2,
-      quote: "I found my purpose through serving in the youth ministry at CITAM Kitale. The community here is welcoming and supportive in every way.",
-      author: "James Ochieng",
-      role: "Youth Ministry Leader",
-      image: "/testimonials/james.jpg"
-    },
-    {
-      id: 3,
-      quote: "The biblical teaching at CITAM Kitale has transformed my understanding of faith. I've grown so much since joining this church.",
-      author: "Mary Wanjiru",
-      role: "Member since 2019",
-      image: "/testimonials/mary.jpg"
-    }
-  ];
-
-  // Sample leadership data
-  const leadership: Leader[] = [
-    {
-      id: 1,
-      name: "Rev. Joseph Kamau",
-      position: "Senior Pastor",
-      image: "/leadership/pastor.jpg",
-      bio: "Rev. Joseph Kamau has been leading CITAM Kitale since 2018. He has a passion for teaching God's Word and mentoring leaders."
-    },
-    {
-      id: 2,
-      name: "Agnes Mwangi",
-      position: "Children's Ministry Director",
-      image: "/leadership/childrens-director.jpg",
-      bio: "Agnes oversees our vibrant children's ministry, ensuring that children learn about God's love in a fun and safe environment."
-    },
-    {
-      id: 3,
-      name: "David Kiprop",
-      position: "Worship Director",
-      image: "/leadership/worship-director.jpg",
-      bio: "David leads our worship team with a focus on creating authentic worship experiences that glorify God."
-    }
-  ];
-
-  // SEO metadata
   const pageTitle = "About CITAM Kitale | Our Mission, Vision & Leadership";
   const pageDescription = "Learn about CITAM Kitale's mission, vision, values, and the leadership team serving our church community in Kitale, Kenya.";
 
@@ -107,7 +42,7 @@ const AboutPage: React.FC = () => {
             className="object-cover"
             priority
             placeholder="blur"
-            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTExIi8+PC9zdmc+"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTExIi8+PC9zdmc+"
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
@@ -147,7 +82,7 @@ const AboutPage: React.FC = () => {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
               />
             </div>
           </div>
@@ -219,24 +154,7 @@ const AboutPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {leadership.map((leader) => (
-              <Card key={leader.id} className="overflow-hidden shadow-lg group hover:shadow-xl transition-shadow duration-300">
-                <div className="relative h-64">
-                  <Image 
-                    src={leader.image} 
-                    alt={leader.name} 
-                    fill 
-                    className="object-cover transition-transform duration-500 group-hover:scale-105" 
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
-                  />
-                </div>
-                <CardContent className="p-6 border-t-2 border-red-600">
-                  <h3 className="text-xl font-bold mb-1 text-black">{leader.name}</h3>
-                  <p className="text-red-600 font-medium mb-3">{leader.position}</p>
-                  <p className="text-gray-700">{leader.bio}</p>
-                </CardContent>
-              </Card>
+              <LeadershipCard key={leader.id} {...leader} />
             ))}
           </div>
         </div>
@@ -255,35 +173,7 @@ const AboutPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="bg-gray-900 text-white border-none shadow-xl">
-                <CardContent className="p-6">
-                  <div className="mb-4 text-red-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                    </svg>
-                  </div>
-                  <p className="text-gray-300 italic mb-6">{testimonial.quote}</p>
-                  <div className="flex items-center">
-                    {testimonial.image && (
-                      <div className="mr-4 relative w-12 h-12 rounded-full overflow-hidden">
-                        <Image 
-                          src={testimonial.image} 
-                          alt={testimonial.author} 
-                          fill 
-                          className="object-cover" 
-                          sizes="48px"
-                          placeholder="blur"
-                          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiM1NTUiLz48L3N2Zz4="
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-bold">{testimonial.author}</p>
-                      <p className="text-gray-400 text-sm">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <TestimonialCard key={testimonial.id} {...testimonial} />
             ))}
           </div>
         </div>

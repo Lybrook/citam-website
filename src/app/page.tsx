@@ -247,7 +247,7 @@ export default function Home(): React.ReactElement {
       <section className="py-16 bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="verse-block max-w-3xl mx-auto text-center">
-        <p className="text-2xl md:text-3xl italic">&quot;For where two or three gather in my name, there am I with them.&quot;</p>
+        <p className="text-2xl md:text-3xl italic">"For where two or three gather in my name, there am I with them."</p>
         <p className="text-right font-bold mt-4 text-red-400">Matthew 18:20</p>
         </div>
       </div>
@@ -261,7 +261,7 @@ export default function Home(): React.ReactElement {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {latestSermons.map((sermon) => (
-          <SermonCard key={sermon.id} sermon={sermon} />
+        <SermonCard key={sermon.id} {...sermon} />
         ))}
         </div>
         
@@ -281,7 +281,7 @@ export default function Home(): React.ReactElement {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {upcomingEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
+        <EventCard key={event.id} {...event} />
         ))}
         </div>
         
@@ -319,7 +319,7 @@ export default function Home(): React.ReactElement {
         <h2 className="text-3xl font-bold mb-10 text-center">Testimonials</h2>
         <div className="max-w-4xl mx-auto">
         <blockquote className="text-center">
-          <p className="text-xl md:text-2xl italic mb-6">&quot;CITAM Kitale has been a blessing to my family. The childrens ministry has helped my kids grow spiritually, and the worship experience is always uplifting.</p>
+          <p className="text-xl md:text-2xl italic mb-6">"CITAM Kitale has been a blessing to my family. The childrens ministry has helped my kids grow spiritually, and the worship experience is always uplifting."</p>
           <footer className="font-semibold">— Sarah Kimani, Member since 2021</footer>
         </blockquote>
         </div>

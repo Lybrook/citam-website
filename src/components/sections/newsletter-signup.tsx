@@ -11,9 +11,10 @@ export default function NewsletterSignup() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
 
-  const validateEmail = (email: string) => {
-    return /\S+@\S+\.\S+/.test(email)
-  }
+  const validateEmail = useCallback((email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return emailRegex.test(email)
+  }, [])
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -26,16 +27,22 @@ export default function NewsletterSignup() {
     setIsLoading(true)
     setError("")
 
-    setTimeout(() => {
+    try {
+      // Add API call to subscribe to newsletter
+      // For demonstration purposes, a timeout is used
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       setIsLoading(false)
       setIsSubmitted(true)
       setEmail("")
-
+    } catch {
+      setIsLoading(false)
+      setError("Failed to subscribe. Please try again.")
+    } finally {
       setTimeout(() => {
         setIsSubmitted(false)
       }, 5000)
-    }, 1000)
-  }, [email])
+    }
+  }, [email, validateEmail])
 
   return (
     <section className="bg-primary/10 py-16">

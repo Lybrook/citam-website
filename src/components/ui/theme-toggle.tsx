@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { Button } from "./button";
@@ -14,16 +12,15 @@ export function ThemeToggle() {
 
   return (
     <Button
-      variant='outline'
-      size='icon'
+      variant="outline"
+      size="icon"
       onClick={toggleTheme}
-      aria-label='Toggle theme'
+      aria-label="Toggle theme"
     >
-
       {resolvedTheme === "dark" ? (
-        <Moon className='h-5 w-5' />
+        <Moon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
       ) : (
-        <Sun className='h-5 w-5' />
+        <Sun className="h-5 w-5 text-gray-500 dark:text-gray-400" />
       )}
     </Button>
   );

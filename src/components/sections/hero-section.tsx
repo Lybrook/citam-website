@@ -40,6 +40,10 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  const handleSlideChange = (index: number) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <section className='relative min-h-screen w-full overflow-hidden'>
       {/* Slides */}
@@ -96,7 +100,7 @@ export default function HeroSection() {
         {slides.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentSlide(index)}
+            onClick={() => handleSlideChange(index)}
             className={`w-3 h-3 rounded-full transition-all transform-gpu ${
               index === currentSlide
                 ? "bg-primary w-8 scale-110"

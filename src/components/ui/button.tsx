@@ -40,6 +40,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  children?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -49,6 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "default",
       size = "default",
       asChild = false,
+      children,
       ...props
     },
     ref
@@ -65,7 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {isClient ? props.children : null}
+        {isClient ? children : null}
       </Comp>
     );
   }

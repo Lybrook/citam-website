@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-accent text-white">
       <div className="container py-16">
@@ -117,7 +119,7 @@ const Footer: React.FC = () => {
       {/* Copyright */}
       <div className="border-t border-white/10 py-6">
         <div className="container text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} CITAM Kitale. All rights reserved.</p>
+          <p>&copy; {currentYear} CITAM Kitale. All rights reserved.</p>
         </div>
       </div>
     </footer>

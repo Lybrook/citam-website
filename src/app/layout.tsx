@@ -25,7 +25,7 @@ export const metadata = {
     "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
   authors: [{ name: "CITAM Kitale" }],
   creator: "CITAM Kitale",
-  metadataBase: new URL("http://localhost:3000"), // Set the base URL for metadata
+  metadataBase: new URL("https://citamkitale.org"), // Set the base URL for metadata
   openGraph: {
     title: "CITAM Kitale | Christ is The Answer Ministries",
     description:
@@ -73,6 +73,14 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
+      <head>
+        <meta charSet='UTF-8' />
+        <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+        <link rel='manifest' href='/site.webmanifest' />
+      </head>
       <body
         className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
       >
