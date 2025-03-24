@@ -1,9 +1,9 @@
 import { Inter, Roboto_Slab } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
-import Header from "@/components/navigation/header";
-import Footer from "@/components/navigation/footer";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import Header from "/components/navigation/header";
+import Footer from "/components/navigation/footer";
+import { ThemeProvider } from "/components/ui/theme-provider";
 
 // Configure fonts
 const inter = Inter({
