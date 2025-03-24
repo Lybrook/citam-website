@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "/components/ui/button";
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);

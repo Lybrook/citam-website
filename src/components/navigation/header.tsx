@@ -1,6 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-
-
 import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";

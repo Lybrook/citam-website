@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "/components/ui/button"
+import { Input } from "/components/ui/input"
 import { Check, AlertCircle } from "lucide-react"
 
 export default function NewsletterSignup() {

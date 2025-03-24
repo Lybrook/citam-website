@@ -8,6 +8,9 @@ interface Ministry {
   name: string;
   description: string;
   link: string;
+  title: string;
+  image: string;
+  anchor: string;
 }
 
 const MinistriesGlimpse: React.FC<{ ministries: Ministry[] }> = ({ ministries }) => {
@@ -19,7 +22,7 @@ const MinistriesGlimpse: React.FC<{ ministries: Ministry[] }> = ({ ministries })
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ministries.map((ministry) => (
-            <MinistryCard key={ministry.id} {...ministry} />
+            <MinistryCard key={ministry.id} ministry={ministry} />
           ))}
         </div>
         
