@@ -87,7 +87,7 @@ const AboutPage: React.FC = () => {
         <meta name="keywords" content="CITAM Kitale, about us, church mission, church vision, church leadership, Pentecostal church, Kitale" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content="/church-building.jpg" />
+        <meta property="og:image" content="/citamKitale1.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
@@ -101,7 +101,7 @@ const AboutPage: React.FC = () => {
       <section className="relative bg-black text-white py-24">
         <div className="absolute inset-0 opacity-60">
           <Image 
-            src="/about-hero.jpg" 
+            src="/citamkitale.jpg" 
             alt="CITAM Kitale Church Community" 
             fill
             className="object-cover"

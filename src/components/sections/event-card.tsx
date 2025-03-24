@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, MapPin, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Badge } from "../ui/badge"; // Adjusted the path to match the relative structure
 
 interface Event {
@@ -23,56 +28,53 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const { title, date, time, location, image, slug, description } = event;
 
   return (
-    <Card className="h-full flex flex-col overflow-hidden border-red-800 border-2 hover:shadow-lg transition-shadow duration-300">
+    <Card className='h-full flex flex-col overflow-hidden border-red-800 border-2 hover:shadow-lg transition-shadow duration-300'>
       {/* Image Container with optimized next/image */}
-      <div className="relative w-full h-60 overflow-hidden">
+      <div className='relative w-full h-60 overflow-hidden'>
         <Image
           src={image}
           alt={`${title} - Church event on ${date}`}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 hover:scale-105"
+          sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+          className='object-cover transition-transform duration-300 hover:scale-105'
           priority={false}
-          loading="lazy"
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-          onError={(e) => {
-            e.currentTarget.src = "/fallback-image.jpg"; // Fallback image for invalid URLs
-          }}
+          loading='lazy'
+          placeholder='blur'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
         />
-        <Badge className="absolute top-2 left-2 bg-red-700 hover:bg-red-800 text-white">
+        <Badge className='absolute top-2 left-2 bg-red-700 hover:bg-red-800 text-white'>
           Upcoming
         </Badge>
       </div>
 
       {/* Event Details */}
-      <CardHeader className="pb-2">
+      <CardHeader className='pb-2'>
         <h3
-          className="text-xl font-bold text-black tracking-tight line-clamp-2"
+          className='text-xl font-bold text-black tracking-tight line-clamp-2'
           title={title}
         >
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+          <p className='text-sm text-gray-600 line-clamp-2'>{description}</p>
         )}
       </CardHeader>
 
-      <CardContent className="pb-2 flex-grow">
-        <div className="space-y-3">
-          <div className="flex items-center text-sm">
-            <Calendar className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800">{date}</span>
+      <CardContent className='pb-2 flex-grow'>
+        <div className='space-y-3'>
+          <div className='flex items-center text-sm'>
+            <Calendar className='w-4 h-4 mr-2 text-red-700' />
+            <span className='text-gray-800'>{date}</span>
           </div>
 
-          <div className="flex items-center text-sm">
-            <Clock className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800">{time}</span>
+          <div className='flex items-center text-sm'>
+            <Clock className='w-4 h-4 mr-2 text-red-700' />
+            <span className='text-gray-800'>{time}</span>
           </div>
 
-          <div className="flex items-center text-sm">
-            <MapPin className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800 line-clamp-1" title={location}>
+          <div className='flex items-center text-sm'>
+            <MapPin className='w-4 h-4 mr-2 text-red-700' />
+            <span className='text-gray-800 line-clamp-1' title={location}>
               {location}
             </span>
           </div>
@@ -80,10 +82,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       </CardContent>
 
       {/* Buttons */}
-      <CardFooter className="pt-4 gap-2 flex flex-col sm:flex-row">
+      <CardFooter className='pt-4 gap-2 flex flex-col sm:flex-row'>
         <Button
           asChild
-          className="flex-1 bg-red-700 hover:bg-red-800 text-white border-none"
+          className='flex-1 bg-red-700 hover:bg-red-800 text-white border-none'
         >
           <Link
             href={`/events/${slug}`}
@@ -95,11 +97,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 
         <Button
           asChild
-          variant="outline"
-          className="flex-1 border-red-700 text-red-700 hover:bg-red-50 hover:text-red-800"
+          variant='outline'
+          className='flex-1 border-red-700 text-red-700 hover:bg-red-50 hover:text-red-800'
         >
           <Link
-            href="/contact#calendar"
+            href='/contact#calendar'
             aria-label={`Add ${title} to your calendar`}
           >
             Add to Calendar
@@ -107,9 +109,9 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         </Button>
 
         <Button
-          variant="ghost"
-          size="icon"
-          className="hidden sm:flex text-red-700 hover:bg-red-50 hover:text-red-800"
+          variant='ghost'
+          size='icon'
+          className='hidden sm:flex text-red-700 hover:bg-red-50 hover:text-red-800'
           aria-label={`Share ${title} event`}
           onClick={() => {
             if (navigator.share) {
@@ -125,7 +127,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             }
           }}
         >
-          <Share2 className="w-4 h-4" />
+          <Share2 className='w-4 h-4' />
         </Button>
       </CardFooter>
     </Card>

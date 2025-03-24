@@ -19,6 +19,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label='Toggle theme'
     >
+
       {resolvedTheme === "dark" ? (
         <Moon className='h-5 w-5' />
       ) : (
