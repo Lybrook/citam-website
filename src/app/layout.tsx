@@ -1,9 +1,7 @@
 import { Inter, Roboto_Slab } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
-import Header from "../components/navigation/header";
-import Footer from "../components/navigation/footer";
-import { ThemeProvider } from "../components/ui/theme-provider";
+
 
 // Configure fonts
 const inter = Inter({
@@ -84,11 +82,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
       >
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <Header />
-          <main className='pt-16 min-h-screen'>{children}</main>
-          <Footer />
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

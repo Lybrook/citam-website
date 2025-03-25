@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
@@ -37,7 +39,6 @@ const AboutPage: React.FC = () => {
         <link rel="canonical" href="https://citamkitale.org/about" />
       </Head>
 
-      Pass the scroll state to the Header if needed
       <Header isScrolled={isScrolled} />
 
       {/* Hero Section */}

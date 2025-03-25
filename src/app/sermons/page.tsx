@@ -1,5 +1,9 @@
+"use client"
+
 import React from 'react';
 import Header from '../../components/navigation/header';
+import { useScroll } from "../../hooks"; // Import the useScroll hook
+
 
 interface Sermon {
   id: number;
@@ -38,9 +42,11 @@ const sermons: Sermon[] = [
 ];
 
 const SermonsPage: React.FC = () => {
+  const isScrolled = useScroll(); // Use the hook to detect scroll state
+
   return (
     <>
-      <Header />
+      <Header isScrolled={isScrolled} />
       <main className="pt-16 min-h-screen">
         <section className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-4">Recent Sermons</h1>

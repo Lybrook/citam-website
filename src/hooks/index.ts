@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
