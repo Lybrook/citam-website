@@ -40,7 +40,7 @@ const AboutPage: React.FC = () => {
       <section className='relative bg-black text-white py-24'>
         <div className='absolute inset-0 opacity-60'>
           <Image
-            src='/citamkitale.jpg'
+            src="/citamkitale.jpg"
             alt='CITAM Kitale Church Community'
             fill
             className='object-cover'

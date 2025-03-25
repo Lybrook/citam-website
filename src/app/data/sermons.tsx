@@ -36,7 +36,7 @@ export const latestSermons: Sermon[] = [
     title: "Grace and Mercy",
     speaker: "Reverend Joseph Kamau",
     date: "March 1, 2025",
-    image: "/ctamKitale.jpg",
+    image: "/citamKitale.jpg",
     slug: "grace-and-mercy",
     description: "A message on the grace and mercy of God.",
     link: "/sermons/grace-and-mercy",
