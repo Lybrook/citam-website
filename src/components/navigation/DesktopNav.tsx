@@ -1,8 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "components/ui/theme-toggle";
-
+import { ThemeToggle } from "../ui/theme-toggle";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -19,7 +20,7 @@ const DesktopNav: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden md:flex items-center space-x-4">
+    <nav className='hidden md:flex items-center space-x-4'>
       {navItems.map((item) => (
         <Link
           key={item.name}

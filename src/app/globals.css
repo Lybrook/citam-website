@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -62,75 +62,3 @@
 }
 
 /* Custom styles for the church website */
-.sermon-card {
-  @apply transition-all duration-300 hover:shadow-lg;
-}
-
-.event-card {
-  @apply border border-border rounded-lg p-4 transition-all duration-300 hover:shadow-lg;
-}
-
-.ministry-card {
-  @apply bg-card text-card-foreground rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg;
-}
-
-.verse-block {
-  @apply bg-muted p-6 rounded-lg italic text-lg font-medium my-8 border-l-4 border-primary;
-}
-
-.hero-section {
-  @apply relative min-h-[70vh] flex items-center justify-center bg-cover bg-center text-white;
-}
-
-.section-heading {
-  @apply text-3xl md:text-4xl font-bold mb-6 text-center;
-}
-
-.section-subheading {
-  @apply text-xl font-medium mb-10 text-center text-muted-foreground;
-}
-
-.page-section {
-  @apply py-16 md:py-24;
-}
-
-/* Improved styles */
-.sermon-card {
-  @apply transition-all duration-300 hover:shadow-lg;
-  @apply md:hover:shadow-2xl;
-}
-
-.event-card {
-  @apply border border-border rounded-lg p-4 transition-all duration-300 hover:shadow-lg;
-  @apply md:hover:shadow-2xl;
-}
-
-.ministry-card {
-  @apply bg-card text-card-foreground rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg;
-  @apply md:hover:shadow-2xl;
-}
-
-.verse-block {
-  @apply bg-muted p-6 rounded-lg italic text-lg font-medium my-8 border-l-4 border-primary;
-  @apply md:border-l-6;
-}
-
-.hero-section {
-  @apply relative min-h-[70vh] flex items-center justify-center bg-cover bg-center text-white;
-  @apply md:min-h-[80vh];
-}
-
-.section-heading {
-  @apply text-3xl md:text-4xl font-bold mb-6 text-center;
-  @apply lg:text-5xl;
-}
-
-.section-subheading {
-  @apply text-xl font-medium mb-10 text-center text-muted-foreground;
-  @apply lg:text-2xl;
-}
-
-.page-section {
-  @apply py-16 md:py-24;
-  @apply lg:py-32;
-}

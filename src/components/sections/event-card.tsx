@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, MapPin, Share2 } from "lucide-react";
-import { Button } from "/components/ui/button";
+import { Button } from "../ui/button";
+
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "/components/ui/card";
+} from "../ui/card";
 import { Badge } from "../ui/badge";
 
 interface Event {

@@ -2,8 +2,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '/components/ui/button';
-import { Ministry } from '/app/data/ministries';
+import { Button } from '../components/ui/button';
+import { Ministry } from '../app/data/ministries';
 
 interface MinistryCardProps {
   ministry: Ministry;

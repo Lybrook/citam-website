@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,14 +15,20 @@ const navItems = [
   { name: "Gallery", href: "/gallery" },
 ];
 
-const MobileNav: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+const MobileNav: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+  isOpen,
+  onClose,
+}) => {
   const pathname = usePathname();
 
   if (!isOpen) return null;
 
   return (
-    <nav className="md:hidden bg-background border-t" aria-label="Mobile navigation">
-      <div className="container py-4 flex flex-col space-y-2">
+    <nav
+      className='md:hidden bg-background border-t'
+      aria-label='Mobile navigation'
+    >
+      <div className='container py-4 flex flex-col space-y-2'>
         {navItems.map((item) => (
           <Link
             key={item.name}
