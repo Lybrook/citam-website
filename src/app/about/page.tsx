@@ -6,7 +6,7 @@ import Header from "../../components/navigation/header";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { testimonials } from "../data/testimonials";
-import { leadership } from "../data/leadership"; // Updated import
+import { leadership } from "../data/leadership"; 
 import LeadershipCard from "../../components/LeadershipCard";
 import TestimonialCard from "../../components/TestimonialCard";
 
@@ -40,7 +40,7 @@ const AboutPage: React.FC = () => {
       <section className='relative bg-black text-white py-24'>
         <div className='absolute inset-0 opacity-60'>
           <Image
-            src='/ctamkitale.jpg'
+            src='/citamkitale.jpg'
             alt='CITAM Kitale Church Community'
             fill
             className='object-cover'
