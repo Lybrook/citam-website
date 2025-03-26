@@ -34,7 +34,7 @@ export const metadata = {
     siteName: "CITAM Kitale",
     images: [
       {
-        url: "/logo.jpg",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "CITAM Kitale",
