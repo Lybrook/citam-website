@@ -4,14 +4,12 @@ import "./globals.css";
 import Header from "../components/navigation/header";
 import Footer from "../components/navigation/footer";
 import { ThemeProvider } from "../components/ui/theme-provider";
-import { useScroll } from "../hooks";
 
 // Configure fonts
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
 
 const roboto_slab = Roboto_Slab({
   subsets: ["latin"],
@@ -70,9 +68,9 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
 };
+
 // Root layout component with proper TypeScript typing
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const isScrolled = useScroll();
   return (
     <html lang='en'>
       <head>
@@ -87,7 +85,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-        <Header isScrolled={isScrolled} />
+          <Header />
           <main className='pt-16 min-h-screen'>{children}</main>
           <Footer />
         </ThemeProvider>

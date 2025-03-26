@@ -1,8 +1,5 @@
-"use client"
-// import React from "react";
+import React from "react";
 import Image from "next/image";
-import { useScroll } from "../../hooks";
-import Header from '../../components/navigation/header';
 
 const images = [
   "/childrenMinistry.jpg",
@@ -48,34 +45,27 @@ const images = [
 ];
 
 const GalleryPage: React.FC = () => {
-  const isScrolled = useScroll();
-
   return (
-    <>
-      <Header isScrolled={isScrolled} />
-      <div className="gallery-container">
-        <h1>Gallery</h1>
-        <p>This is the Gallery page.</p>
-        <div className="image-grid">
-          {images.map((image, index) => (
-            <div key={index} className="image-container">
-              <Image
-                src={image}
-                alt={`Gallery image ${index + 1}`}
-                width={500}
-                height={500}
-                className="object-cover"
-                placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
-                loading="lazy"
-                quality={90}
-                priority={index < 10}
-              />
-            </div>
-          ))}
-        </div>
+    <div className="gallery-container">
+      <h1>Gallery</h1>
+      <p>This is the Gallery page.</p>
+      <div className="image-grid">
+        {images.map((image, index) => (
+          <div key={index} className="image-container">
+            <Image
+              src={image}
+              alt={`Gallery image ${index + 1}`}
+              width={500}
+              height={500}
+              className="object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PC9zdmc+"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

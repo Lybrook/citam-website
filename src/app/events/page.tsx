@@ -1,8 +1,5 @@
-
-"use client";
-// import React from 'react';
+import React from 'react';
 import Header from '../../components/navigation/header';
-import { useScroll } from "../../hooks";
 
 interface Event {
   id: number;
@@ -41,10 +38,9 @@ const events: Event[] = [
 ];
 
 const EventsPage: React.FC = () => {
-  const isScrolled = useScroll();
   return (
     <>
-      <Header isScrolled={isScrolled} />
+      <Header />
       <main className="pt-16 min-h-screen">
         <section className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-4">Upcoming Events</h1>

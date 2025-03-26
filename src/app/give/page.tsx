@@ -1,13 +1,12 @@
 "use client";
+
 import React, { useState, FormEvent } from 'react';
 import Header from '../../components/navigation/header';
-import { useScroll } from "../../hooks";
 
 const GivePage: React.FC = () => {
   const [amount, setAmount] = useState<number>(0);
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const isScrolled = useScroll();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,7 +16,7 @@ const GivePage: React.FC = () => {
 
   return (
     <>
-      <Header isScrolled={isScrolled} />
+      <Header />
       <main className="pt-16 min-h-screen">
         <section className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-4">Give</h1>

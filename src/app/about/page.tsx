@@ -1,5 +1,4 @@
-"use client"
-// import React from "react";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,14 +6,11 @@ import Header from "../../components/navigation/header";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { testimonials } from "../data/testimonials";
-import { leadership } from "../data/leadership";
+import { leadership } from "../data/leadership"; 
 import LeadershipCard from "../../components/LeadershipCard";
 import TestimonialCard from "../../components/TestimonialCard";
-import { useScroll } from "../../hooks"; // Import the useScroll hook
 
 const AboutPage: React.FC = () => {
-  const isScrolled = useScroll(); // Use the hook to detect scroll state
-
   const pageTitle = "About CITAM Kitale | Our Mission, Vision & Leadership";
   const pageDescription =
     "Learn about CITAM Kitale's mission, vision, values, and the leadership team serving our church community in Kitale, Kenya.";
@@ -23,22 +19,22 @@ const AboutPage: React.FC = () => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
+        <meta name='description' content={pageDescription} />
         <meta
-          name="keywords"
-          content="CITAM Kitale, about us, church mission, church vision, church leadership, Pentecostal church, Kitale"
+          name='keywords'
+          content='CITAM Kitale, about us, church mission, church vision, church leadership, Pentecostal church, Kitale'
         />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content="/citamKitale1.jpg" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
-        <link rel="canonical" href="https://citamkitale.org/about" />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={pageDescription} />
+        <meta property='og:image' content='/citamKitale1.jpg' />
+        <meta property='og:type' content='website' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content={pageTitle} />
+        <meta name='twitter:description' content={pageDescription} />
+        <link rel='canonical' href='https://citamkitale.org/about' />
       </Head>
 
-      <Header isScrolled={isScrolled} />
+      <Header />
 
       {/* Hero Section */}
       <section className='relative bg-black text-white py-24'>
