@@ -39,15 +39,6 @@ const AboutPage: React.FC = () => {
       {/* Hero Section */}
       <section className='relative bg-black text-white py-24'>
         <div className='absolute inset-0 opacity-60'>
-          <Image
-            src="/citamkitale.jpg"
-            alt='CITAM Kitale Church Community'
-            fill
-            className='object-cover'
-            priority
-            placeholder='blur'
-            blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTExIi8+PC9zdmc+'
-          />
         </div>
         <div className='container mx-auto px-4 relative z-10'>
           <h1 className='text-4xl md:text-5xl font-bold mb-4'>
