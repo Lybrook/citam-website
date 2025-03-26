@@ -1,10 +1,14 @@
+"use client";
 // @/components/sections/welcome-section.tsx
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
+
+
 const WelcomeSection: React.FC = () => {
+
   return (
     <section className='py-16 md:py-24 bg-white'>
       <div className='container mx-auto px-4'>

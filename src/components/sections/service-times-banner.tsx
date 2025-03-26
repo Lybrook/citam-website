@@ -1,7 +1,12 @@
 // @/components/sections/service-times-banner.tsx
+"use client";
+
 import React from 'react';
 
+
 const ServiceTimesBanner: React.FC = () => {
+
+
   return (
     <section className="bg-red-600 text-white py-4">
       <div className="container mx-auto px-4">

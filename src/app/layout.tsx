@@ -1,13 +1,17 @@
 import { Inter, Roboto_Slab } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
-
+import Header from "../components/navigation/header";
+import Footer from "../components/navigation/footer";
+import { ThemeProvider } from "../components/ui/theme-provider";
+import { useScroll } from "../hooks";
 
 // Configure fonts
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
 
 const roboto_slab = Roboto_Slab({
   subsets: ["latin"],
@@ -32,7 +36,7 @@ export const metadata = {
     siteName: "CITAM Kitale",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo.jpg",
         width: 1200,
         height: 630,
         alt: "CITAM Kitale",
@@ -66,9 +70,9 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
 };
-
 // Root layout component with proper TypeScript typing
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const isScrolled = useScroll();
   return (
     <html lang='en'>
       <head>
@@ -82,7 +86,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
       >
-        {children}
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        <Header isScrolled={isScrolled} />
+          <main className='pt-16 min-h-screen'>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

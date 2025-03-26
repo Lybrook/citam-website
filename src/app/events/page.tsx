@@ -1,7 +1,6 @@
 
 "use client";
-
-import React from 'react';
+// import React from 'react';
 import Header from '../../components/navigation/header';
 import { useScroll } from "../../hooks";
 

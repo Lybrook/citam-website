@@ -1,7 +1,11 @@
+"use client";
 // @/components/sections/bible-verse-section.tsx
 import React from 'react';
 
+
+
 const BibleVerseSection: React.FC = () => {
+
   return (
     <section className="py-16 bg-black text-white">
       <div className="container mx-auto px-4">
