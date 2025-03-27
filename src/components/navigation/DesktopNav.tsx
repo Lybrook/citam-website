@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "../ui/theme-toggle";
+// import { ThemeToggle } from "../ui/theme-toggle";
 import { Home, Info, Mic, Calendar, Users, Heart, Phone, Image } from "lucide-react";
 import { Button } from "../../components/ui/button";
 
@@ -55,7 +55,7 @@ const DesktopNav: React.FC = () => {
       
       {/* Theme Toggle with Slight Styling */}
       <div className="ml-2">
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
       </div>
     </nav>
   );
