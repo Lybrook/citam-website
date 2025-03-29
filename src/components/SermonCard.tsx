@@ -16,7 +16,7 @@ interface Sermon {
   link: string;
 }
 
-const SermonCard: React.FC<{ sermon: Sermon }> = ({ sermon }) => {
+const SermonCard: React.FC<{ sermon: Sermon; className?: string }> = ({ sermon, className }) => {
   const formattedDate = new Date(sermon.date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -25,7 +25,7 @@ const SermonCard: React.FC<{ sermon: Sermon }> = ({ sermon }) => {
   const formattedTitle = sermon.title || sermon.slug.replace(/-/g, " ");
 
   return (
-    <div className="flex flex-col bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className={`flex flex-col bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 ${className || ""}`}>
       <Image
         src={sermon.image || "/placeholder.jpg"}
         alt={formattedTitle}

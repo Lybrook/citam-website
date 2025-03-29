@@ -9,6 +9,7 @@ import { Ministry } from '../app/data/ministries';
 
 interface MinistryCardProps {
   ministry: Ministry;
+  className?: string;
 }
 
 const MinistryCard: React.FC<MinistryCardProps> = ({ ministry }) => {
