@@ -5,43 +5,45 @@ import Head from 'next/head';
 import { z } from 'zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage 
-} from "../../components/ui/form";
-import { Input } from "../../components/ui/input";
-import { Button } from "../../components/ui/button";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from "../../components/ui/card";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "../../components/ui/select"; // Ensure the file name matches the actual file in the directory
-import { Toast } from "../../components/ui/use-toast";
-
-import { DollarSign, Heart, CreditCard } from 'lucide-react';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../../components/ui/form';
+import { Input } from '../../components/ui/input';
+import { Button } from '../../components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../../components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../../components/ui/select';
+import { Toast } from '../../components/ui/use-toast';
+import { Heart } from 'lucide-react';
 import Header from '../../components/navigation/header';
 
 // Donation Form Validation Schema
 const donationSchema = z.object({
-  amount: z.number().min(1, { message: "Donation amount must be at least $1" }),
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  donationType: z.enum(["general", "missions", "building-fund", "youth-ministry"], {
-    required_error: "Please select a donation type"
-  })
+  amount: z.number().min(10, { message: 'Donation amount must be at least KES 10' }),
+  name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
+  email: z.string().email({ message: 'Invalid email address' }),
+  phone: z.string().regex(/^07\d{8}$/, {
+    message: 'Please enter a valid Kenyan phone number starting with 07',
+  }),
+  donationType: z.enum(['general', 'missions', 'building-fund', 'youth-ministry'], {
+    required_error: 'Please select a donation type',
+  }),
 });
 
 type DonationFormInputs = z.infer<typeof donationSchema>;
@@ -53,34 +55,37 @@ const GivePage: React.FC = () => {
       amount: undefined,
       name: '',
       email: '',
-      donationType: 'general'
-    }
+      phone: '',
+      donationType: 'general',
+    },
   });
 
   const onSubmit: SubmitHandler<DonationFormInputs> = async (data) => {
     try {
-      // Implement actual donation submission logic
       const response = await fetch('/api/donate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
 
       if (response.ok) {
         Toast({
-          title: "Donation Received",
-          content: "Thank you for your generous contribution!",
-          variant: "default"
+          title: 'Payment Initiated',
+          content: result.message || 'Payment request sent to your phone. Please complete the payment.',
+          variant: 'default',
         });
         form.reset();
       } else {
-        throw new Error('Donation submission failed');
+        throw new Error(result.error || 'Donation submission failed');
       }
-    } catch {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Could not process donation. Please try again.';
       Toast({
-        title: "Error",
-        content: "Could not process donation. Please try again.",
-        variant: "destructive"
+        title: 'Error',
+        content: errorMessage,
+        variant: 'destructive',
       });
     }
   };
@@ -89,28 +94,25 @@ const GivePage: React.FC = () => {
     <>
       <Head>
         <title>Give to CITAM Kitale - Support Our Mission</title>
-        <meta 
-          name="description" 
-          content="Support CITAM Kitale's mission through your generous donations. Contribute to our community outreach, missions, and ministry programs." 
+        <meta
+          name="description"
+          content="Support CITAM Kitale's mission through your generous donations via M-Pesa. Contribute to our community outreach, missions, and ministry programs."
         />
-        <meta 
-          name="keywords" 
-          content="CITAM Kitale, church donation, give, support ministry, Christian giving" 
+        <meta
+          name="keywords"
+          content="CITAM Kitale, church donation, give, support ministry, Christian giving, M-Pesa donation"
         />
-        <link 
-          rel="canonical" 
-          href="https://www.citamkitale.org/give" 
-        />
+        <link rel="canonical" href="https://www.citamkitale.org/give" />
         <meta property="og:title" content="Support CITAM Kitale" />
-        <meta 
-          property="og:description" 
-          content="Your generosity helps us spread hope and love in our community." 
+        <meta
+          property="og:description"
+          content="Your generosity helps us spread hope and love in our community."
         />
         <meta property="og:type" content="website" />
       </Head>
 
       <Header />
-      
+
       <main className="pt-16 min-h-screen bg-white text-black">
         <section className="container mx-auto px-4 py-12 max-w-2xl">
           <div className="text-center mb-12">
@@ -121,31 +123,28 @@ const GivePage: React.FC = () => {
           </div>
 
           <Card className="border-red-100 shadow-md">
-            <CardHeader cardTitle="Online Donation" description="Securely support our ministry through various giving options.">
+            <CardHeader cardTitle={undefined} description={undefined}>
               <CardTitle className="text-red-900 flex items-center">
-                <DollarSign className="mr-2 text-red-700" />
+                <Heart className="mr-2 text-red-700" />
                 Online Donation
               </CardTitle>
               <CardDescription>
-                Securely support our ministry through various giving options.
+                Securely support our ministry through M-Pesa.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
-                <form 
-                  onSubmit={form.handleSubmit(onSubmit)} 
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="amount"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-red-900">Donation Amount</FormLabel>
+                        <FormLabel className="text-red-900">Donation Amount (KES)</FormLabel>
                         <FormControl>
-                          <Input 
-                            type="number" 
-                            placeholder="Enter amount" 
+                          <Input
+                            type="number"
+                            placeholder="Enter amount"
                             {...field}
                             onChange={(e) => field.onChange(Number(e.target.value))}
                             className="border-red-300 focus:border-red-500 focus:ring-red-500"
@@ -162,10 +161,7 @@ const GivePage: React.FC = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-red-900">Donation Type</FormLabel>
-                          <Select
-                          onValueChange={field.onChange} 
-                          defaultValue={field.value}
-                        >
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="border-red-300 focus:border-red-500">
                               <SelectValue placeholder="Select donation type" />
@@ -210,8 +206,8 @@ const GivePage: React.FC = () => {
                       <FormItem>
                         <FormLabel className="text-red-900">Your Name</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="Enter your name" 
+                          <Input
+                            placeholder="Enter your name"
                             {...field}
                             className="border-red-300 focus:border-red-500 focus:ring-red-500"
                           />
@@ -228,8 +224,8 @@ const GivePage: React.FC = () => {
                       <FormItem>
                         <FormLabel className="text-red-900">Your Email</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="Enter your email" 
+                          <Input
+                            placeholder="Enter your email"
                             {...field}
                             className="border-red-300 focus:border-red-500 focus:ring-red-500"
                           />
@@ -239,13 +235,30 @@ const GivePage: React.FC = () => {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-red-900">Phone Number</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="07XXXXXXXX"
+                            {...field}
+                            className="border-red-300 focus:border-red-500 focus:ring-red-500"
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-600" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button
+                    type="submit"
                     className="w-full bg-red-800 hover:bg-red-900 text-white transition-colors"
                     disabled={form.formState.isSubmitting}
                   >
-                    <CreditCard className="mr-2" />
-                    {form.formState.isSubmitting ? 'Processing...' : 'Donate'}
+                    {form.formState.isSubmitting ? 'Processing...' : 'Donate via M-Pesa'}
                   </Button>
                 </form>
               </Form>
@@ -253,19 +266,19 @@ const GivePage: React.FC = () => {
           </Card>
 
           <div className="mt-8 bg-red-50 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold text-red-900 mb-4">Additional Giving Options</h2>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <Heart className="mr-2 text-red-700" />
-                In-person during our services
+            <h2 className="text-xl font-semibold text-red-900 mb-4">Other Ways to Give</h2>
+            <ul className="space-y-4 text-gray-700">
+              <li>
+                <strong>In-person:</strong> During our Sunday services
               </li>
-              <li className="flex items-center">
-                <Heart className="mr-2 text-red-700" />
-                Bank transfer to our church account
+              <li>
+                <strong>Bank Transfer:</strong> Account Name: CITAM Kitale, Bank: XYZ, Account Number: 123456789
               </li>
-              <li className="flex items-center">
-                <Heart className="mr-2 text-red-700" />
-                Checks payable to CITAM Kitale
+              <li>
+                <strong>M-Pesa Paybill:</strong> Paybill Number: 123456, Account: Your Name
+              </li>
+              <li>
+                <strong>Cheques:</strong> Payable to CITAM Kitale
               </li>
             </ul>
           </div>
