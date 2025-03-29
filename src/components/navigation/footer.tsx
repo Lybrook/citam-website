@@ -2,11 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
+import { ThemeProvider } from "../../components/ui/theme-provider";
+
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
+ 
     <footer className="bg-accent text-white">
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -38,6 +41,12 @@ const Footer: React.FC = () => {
               </Link>
             </div>
           </div>
+          <div>   <ThemeProvider
+                      attribute="class"
+                      defaultTheme="system"
+                      enableSystem
+                      disableTransitionOnChange
+                    ></ThemeProvider></div>
 
           {/* Column 2 - Quick Links */}
           <div>

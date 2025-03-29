@@ -20,6 +20,7 @@ import ServiceTimesBanner from "../components/sections/service-times-banner";
 import WelcomeSection from "../components/sections/welcome-section";
 import BibleVerseSection from "../components/sections/bible-verse-section";
 import TestimonialSection from "../components/sections/testimonials";
+import { ThemeProvider } from "../components/ui/theme-provider";
 
 export default function Home() {
   // SEO metadata
@@ -34,6 +35,12 @@ export default function Home() {
         <meta name='description' content={pageDescription} />
         {/* ... (rest of the head metadata remains the same) */}
       </Head>
+      <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                            disableTransitionOnChange
+                          ></ThemeProvider>
 
       <HeroSection />
       <ServiceTimesBanner />
