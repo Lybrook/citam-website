@@ -4,7 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Info, Mic, Calendar, Users, Heart, Phone, Image } from "lucide-react";
+import { X, Home, Info, Mic, Calendar, Users, Heart, Phone, Image } from "lucide-react";
+import { Button } from "../../components/ui/button";
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
@@ -31,51 +32,72 @@ const MobileNav: React.FC<{
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.nav
-          id={id}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className='fixed inset-x-0 top-16 z-40 md:hidden bg-white shadow-lg'
-          aria-label='Mobile navigation'
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 bg-black/50"
+          onClick={onClose}
         >
-          <div className='container mx-auto px-4 py-6'>
-            <div className='grid grid-cols-2 gap-4'>
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`
-                      flex items-center justify-center 
-                      px-4 py-3 space-x-2 
-                      text-sm font-medium 
-                      rounded-lg 
-                      transition-all duration-200 
-                      hover:scale-105 
-                      ${
-                        pathname === item.href
-                          ? "bg-red-100 text-red-900 font-bold"
-                          : "text-gray-700 hover:bg-red-50 hover:text-red-800"
-                      }
-                    `}
-                    aria-current={pathname === item.href ? "page" : undefined}
-                    onClick={onClose} // Close the menu on link click
-                  >
-                    <Icon 
-                      className={`w-5 h-5 ${
-                        pathname === item.href ? "text-red-900" : "text-gray-600"
-                      }`} 
-                    />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+          <motion.nav
+            id={id}
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg"
+            aria-label="Mobile navigation"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-black">Menu</h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onClose}
+                  aria-label="Close menu"
+                >
+                  <X className="h-6 w-6 text-black" />
+                </Button>
+              </div>
+              <div className="flex flex-col space-y-4">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  return (
+                    <Button
+                      key={item.name}
+                      variant={isActive ? "default" : "ghost"}
+                      asChild
+                      className={`
+                        w-full justify-start px-4 py-3 rounded-md transition-all duration-200
+                        ${isActive
+                          ? "bg-red-600 text-white hover:bg-red-700"
+                          : "text-black hover:bg-red-100 hover:text-red-900"}
+                      `}
+                    >
+                      <Link
+                        href={item.href}
+                        className="flex items-center space-x-3"
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={onClose}
+                      >
+                        <Icon
+                          className={`h-5 w-5 ${
+                            isActive ? "text-white" : "text-black"
+                          }`}
+                        />
+                        <span>{item.name}</span>
+                      </Link>
+                    </Button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </motion.nav>
+          </motion.nav>
+        </motion.div>
       )}
     </AnimatePresence>
   );

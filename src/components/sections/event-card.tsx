@@ -5,12 +5,7 @@ import Link from "next/link";
 import { Calendar, Clock, MapPin, Share2 } from "lucide-react";
 import { Button } from "../ui/button";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "../ui/card";
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 
 interface Event {
@@ -51,11 +46,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       </div>
 
       {/* Event Details */}
-      <CardHeader
-        className="pb-2"
-        cardTitle={title}
-        description={description || ""}
-      />
+      <CardHeader className="pb-2">
+        <CardTitle>{title}</CardTitle>
+        {description && <CardDescription>{description}</CardDescription>}
+      </CardHeader>
 
       <CardContent className="pb-2 flex-grow">
         <div className="space-y-3">

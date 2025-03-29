@@ -7,6 +7,8 @@ import {
   Card, 
   CardContent, 
   CardHeader, 
+  CardTitle,
+  CardDescription 
 } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Calendar, Clock, MapPin } from 'lucide-react';
@@ -94,10 +96,12 @@ const EventsPage: React.FC = () => {
                 key={event.id} 
                 className="border-red-100 hover:shadow-md transition-shadow duration-300"
               >
-                <CardHeader 
-                  cardTitle={event.name} 
-                  description={event.description} 
-                />
+                  <CardTitle>{event.name}</CardTitle>
+                  <p className="text-gray-600">{event.description}</p>
+                  <CardDescription>{event.description}</CardDescription>
+                  <CardHeader className="text-red-700 font-medium mb-2">
+                    {event.name}
+                  </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">

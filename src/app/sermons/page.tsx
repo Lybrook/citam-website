@@ -101,11 +101,20 @@ const SermonsPage: React.FC = () => {
                 key={sermon.id} 
                 className="border-red-100 hover:shadow-md transition-shadow duration-300"
               >
-                <CardHeader cardTitle={undefined} description={undefined}>
+                <CardHeader>
                   <div className="flex items-center mb-2">
                     <Mic className="w-6 h-6 text-red-700 mr-3" />
                     <CardTitle className="text-red-900">{sermon.title}</CardTitle>
                   </div>
+                  {sermon.series && (
+                    <div className="text-sm text-red-700 font-medium mb-2">
+                      Series: {sermon.series}
+                    </div>
+                  )}
+                  <CardDescription className="text-gray-600">
+                    {sermon.description}
+                  </CardDescription>
+                  <CardTitle className="text-red-900">{sermon.title}</CardTitle>
                   {sermon.series && (
                     <div className="text-sm text-red-700 font-medium mb-2">
                       Series: {sermon.series}

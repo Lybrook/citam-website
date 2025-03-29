@@ -123,7 +123,7 @@ const GivePage: React.FC = () => {
           </div>
 
           <Card className="border-red-100 shadow-md">
-            <CardHeader cardTitle={undefined} description={undefined}>
+            <CardHeader>
               <CardTitle className="text-red-900 flex items-center">
                 <Heart className="mr-2 text-red-700" />
                 Online Donation

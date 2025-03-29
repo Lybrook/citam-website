@@ -3,7 +3,7 @@ import React from "react";
 import Head from "next/head";
 import HeroSection from "../components/sections/hero-section";
 
-import SermonCard from "../components/sections/sermon-card";
+import SermonCard from "../components/SermonCard";
 import EventCard from "../components/sections/event-card";
 import NewsletterSignup from "../components/sections/newsletter-signup";
 import { Button } from "../components/ui/button";

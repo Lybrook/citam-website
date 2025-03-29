@@ -22,30 +22,32 @@ const DesktopNav: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <nav className='hidden lg:flex items-center space-x-2'>
+    <nav className="hidden lg:flex items-center space-x-4">
       {navItems.map((item) => {
         const Icon = item.icon;
+        const isActive = pathname === item.href;
         return (
           <Button
             key={item.name}
-            variant={pathname === item.href ? "default" : "ghost"}
+            variant={isActive ? "default" : "ghost"}
             asChild
             className={`
-              px-3 py-2 
-              ${pathname === item.href 
-                ? "bg-red-600 text-white hover:bg-red-700" 
-                : "text-gray-700 hover:bg-red-50 hover:text-red-800"}
+              px-4 py-2 rounded-md transition-all duration-200
+              ${isActive
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : "text-black hover:bg-red-100 hover:text-red-900"}
+              focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
             `}
           >
             <Link
               href={item.href}
               className="flex items-center space-x-2"
-              aria-current={pathname === item.href ? "page" : undefined}
+              aria-current={isActive ? "page" : undefined}
             >
-              <Icon 
+              <Icon
                 className={`h-4 w-4 ${
-                  pathname === item.href ? "text-white" : "text-gray-600"
-                }`} 
+                  isActive ? "text-white" : "text-black"
+                }`}
               />
               <span>{item.name}</span>
             </Link>
@@ -53,8 +55,8 @@ const DesktopNav: React.FC = () => {
         );
       })}
       
-      {/* Theme Toggle with Slight Styling */}
-      <div className="ml-2">
+      {/* Theme Toggle */}
+      <div className="ml-4">
         <ThemeToggle />
       </div>
     </nav>
