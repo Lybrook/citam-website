@@ -3,10 +3,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { 
-  Card, 
-  CardContent, 
-  CardHeader} from "../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { 
   Users, 
@@ -94,13 +91,12 @@ const MinistriesPage: React.FC = () => {
                 key={ministry.id} 
                 className="border-red-100 hover:shadow-md transition-shadow duration-300"
               >
-                <CardHeader 
-                  cardTitle={ministry.name} 
-                  description={ministry.description}
-                >
+                <CardHeader>
                   <div className="flex items-center mb-2">
                     <ministry.icon className="w-8 h-8 text-red-700 mr-3" />
                   </div>
+                  <CardTitle>{ministry.name}</CardTitle>
+                  <CardDescription>{ministry.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/contact" passHref>
