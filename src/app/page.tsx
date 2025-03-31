@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import Head from "next/head";
 import HeroSection from "../components/sections/hero-section";
 import SermonCard from "../components/SermonCard";

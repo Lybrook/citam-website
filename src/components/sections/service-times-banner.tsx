@@ -1,8 +1,6 @@
 // @/components/sections/service-times-banner.tsx
 "use client";
 
-import React from 'react';
-
 
 const ServiceTimesBanner: React.FC = () => {
 
