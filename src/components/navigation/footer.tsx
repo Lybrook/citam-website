@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
-import { ThemeProvider } from "../../components/ui/theme-provider";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -116,13 +115,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      />
-      {/* Copyright */}
+      
       <div className="border-t border-gray-700 py-6">
         <div className="container text-center text-sm text-gray-400">
           <p>© {currentYear} CITAM Kitale. All rights reserved.</p>

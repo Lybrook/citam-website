@@ -15,6 +15,7 @@ import WelcomeSection from "../components/sections/welcome-section";
 import BibleVerseSection from "../components/sections/bible-verse-section";
 import TestimonialSection from "../components/sections/testimonials";
 
+
 // Reusable Section component for consistent layout
 const Section: React.FC<{
   title: React.ReactNode;

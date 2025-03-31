@@ -6,7 +6,6 @@ import { Button } from "../../components/ui/button";
 import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import { ThemeProvider } from "../../components/ui/theme-provider";
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -75,13 +74,7 @@ const Header: React.FC = () => {
           <Logo />
         </div>
 
-        {/* Theme Provider */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        />
+        
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-6">
