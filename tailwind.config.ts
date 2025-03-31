@@ -1,4 +1,4 @@
-import animate from "tailwindcss-animate";
+const animate = ("tailwindcss-animate");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

@@ -1,5 +1,4 @@
 import { Inter, Roboto_Slab } from "next/font/google";
-import { ReactNode } from "react";
 import "./globals.css";
 import Header from "../components/navigation/header";
 import Footer from "../components/navigation/footer";
@@ -70,7 +69,11 @@ export const metadata = {
 };
 
 // Root layout component with proper TypeScript typing
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
