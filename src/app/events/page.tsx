@@ -8,51 +8,12 @@ import {
   CardContent, 
   CardHeader, 
   CardTitle,
-  CardDescription 
 } from "../../components/ui/card";
+import Image from 'next/image';
 import { Button } from "../../components/ui/button";
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import Header from '../../components/navigation/header';
-
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-  time: string;
-  description: string;
-  registrationLink: string;
-  location?: string;
-}
-
-const events: Event[] = [
-  {
-    id: 1,
-    name: "Sunday Service",
-    date: "Every Sunday",
-    time: "8:00 AM - 10:00 AM",
-    description: "Join us for our Sunday service filled with worship and fellowship.",
-    registrationLink: "/register/sunday-service",
-    location: "Main Church Sanctuary"
-  },
-  {
-    id: 2,
-    name: "Midweek Prayer",
-    date: "Wednesdays",
-    time: "5:30 PM - 7:00 PM",
-    description: "Come together for a time of prayer and intercession.",
-    registrationLink: "/register/midweek-prayer",
-    location: "Prayer Room"
-  },
-  {
-    id: 3,
-    name: "Community Outreach",
-    date: "Last Saturday of the Month",
-    time: "10:00 AM - 2:00 PM",
-    description: "Join us as we serve our community and share the love of Christ.",
-    registrationLink: "/register/community-outreach",
-    location: "Various Community Locations"
-  },
-];
+import { upcomingEvents } from '@/src/app/data/events';
 
 const EventsPage: React.FC = () => {
   return (
@@ -61,11 +22,11 @@ const EventsPage: React.FC = () => {
         <title>CITAM Kitale - Upcoming Church Events</title>
         <meta 
           name="description" 
-          content="Discover upcoming events at CITAM Kitale. Join our Sunday services, midweek prayers, and community outreach programs." 
+          content="Discover upcoming events at CITAM Kitale. Join our youth conferences, women's retreats, and men's fellowships." 
         />
         <meta 
           name="keywords" 
-          content="CITAM Kitale, church events, Sunday service, prayer meeting, community outreach, Christian events" 
+          content="CITAM Kitale, church events, youth conference, women's retreat, men's fellowship, Christian events" 
         />
         <link 
           rel="canonical" 
@@ -86,22 +47,26 @@ const EventsPage: React.FC = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-red-800 mb-4">Upcoming Events</h1>
             <p className="text-gray-700 max-w-xl mx-auto">
-              Join us for worship, prayer, and community service. Check out our upcoming events below.
+              Join us for worship, fellowship, and community service. Check out our upcoming events below.
             </p>
           </div>
 
           <div className="space-y-6">
-            {events.map((event) => (
+            {upcomingEvents.map((event) => (
               <Card 
                 key={event.id} 
                 className="border-red-100 hover:shadow-md transition-shadow duration-300"
               >
-                  <CardTitle>{event.name}</CardTitle>
-                  <p className="text-gray-600">{event.description}</p>
-                  <CardDescription>{event.description}</CardDescription>
-                  <CardHeader className="text-red-700 font-medium mb-2">
-                    {event.name}
-                  </CardHeader>
+                <Image 
+                  src={event.image} 
+                  alt={event.title} 
+                  width={800} 
+                  height={400} 
+                  className="w-full h-48 object-cover rounded-t-lg" 
+                />
+                <CardHeader>
+                  <CardTitle>{event.title}</CardTitle>
+                </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
@@ -112,16 +77,13 @@ const EventsPage: React.FC = () => {
                       <Clock className="w-5 h-5 text-red-700" />
                       <span className="font-medium">{event.time}</span>
                     </div>
-                    {event.location && (
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-5 h-5 text-red-700" />
-                        <span className="font-medium">{event.location}</span>
-                      </div>
-                    )}
+                    <div className="flex items-center space-x-2">
+                      <MapPin className="w-5 h-5 text-red-700" />
+                      <span className="font-medium">{event.location}</span>
+                    </div>
                   </div>
-                  
                   <div className="mt-6">
-                    <Link href={event.registrationLink} passHref>
+                    <Link href={`/register/${event.slug}`} passHref>
                       <Button 
                         variant="default" 
                         className="w-full bg-red-800 hover:bg-red-900 text-white"
