@@ -1,8 +1,10 @@
-import { Inter, Roboto_Slab } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/navigation/header";
 import Footer from "../components/navigation/footer";
 import { ThemeProvider } from "../components/ui/theme-provider";
+import { cn } from "../utils";
+
 
 // Configure fonts
 const inter = Inter({
@@ -10,10 +12,7 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const roboto_slab = Roboto_Slab({
-  subsets: ["latin"],
-  variable: "--font-heading",
-});
+// Removed unused roboto_slab variable
 
 // Define metadata for the application
 export const metadata = {
@@ -71,9 +70,9 @@ export const metadata = {
 // Root layout component with proper TypeScript typing
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -99,9 +98,8 @@ export default function RootLayout({
         <meta name="twitter:description" content={metadata.twitter.description} />
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
       </head>
-      <body
-        className={`${inter.variable} ${roboto_slab.variable} font-sans bg-background text-foreground`}
-      >
+      <body className={cn("min-h-screen bg-background", inter.className)}>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -109,7 +107,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="pt-16 min-h-screen">{children}</main>
+          {children}
           <Footer />
         </ThemeProvider>
       </body>
