@@ -66,7 +66,7 @@ export default function AboutPage() {
         <section
           className="relative py-24 text-white"
           style={{
-            backgroundImage: "url(/church-hero.jpg)",
+            backgroundImage: "url(/citamKitale2.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -230,14 +230,14 @@ export default function AboutPage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-white text-red-600 hover:bg-gray-100"
+                className="border-white text-white hover:bg-red-700"
               >
                 <Link href="/services">Service Times</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
-                variant="outline"
+                // variant="outline"
                 className="border-white text-white hover:bg-red-700"
               >
                 <Link href="/contact">Contact Us</Link>

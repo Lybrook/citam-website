@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { Card, CardContent } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-import { ImageIcon } from "lucide-react";
+// import { Button } from "../../components/ui/button";
+// import { ImageIcon } from "lucide-react";
 
 const images = [
   "/childrenMinistry.jpg",
@@ -104,12 +104,12 @@ const GalleryPage: React.FC = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center transition-all duration-300">
-                  <Button 
+                  {/* <Button 
                     variant="outline" 
                     className="opacity-0 group-hover:opacity-100 bg-white text-red-900 hover:bg-red-100 transition-all"
                   >
                     <ImageIcon className="mr-2" /> View
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             ))}

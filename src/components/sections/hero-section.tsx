@@ -20,7 +20,7 @@ export default function HeroSection() {
     {
       image: "/pastor.jpg",
       title: "Join Us This Sunday",
-      subtitle: "8:00 AM & 10:30 AM Services",
+      subtitle: "10:00 AM & 12:00 AM Services",
       buttonText: "View Schedule",
       buttonLink: "/about#schedule",
     },
@@ -84,7 +84,7 @@ export default function HeroSection() {
               <Link href={slide.buttonLink} passHref>
                 <Button
                   size='lg'
-                  className='bg-primary hover:bg-primary/90 text-white'
+                  // className='bg-primary hover:bg-primary/90 text-black'
                   variant='default'
                 >
                   {slide.buttonText}
