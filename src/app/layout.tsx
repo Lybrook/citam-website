@@ -3,16 +3,14 @@ import "./globals.css";
 import Header from "../components/navigation/header";
 import Footer from "../components/navigation/footer";
 import { ThemeProvider } from "../components/ui/theme-provider";
+import ThemeToggle from "../components/theme-toggle";
 import { cn } from "../utils";
-
 
 // Configure fonts
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
-// Removed unused roboto_slab variable
 
 // Define metadata for the application
 export const metadata = {
@@ -23,7 +21,7 @@ export const metadata = {
     "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
   authors: [{ name: "CITAM Kitale" }],
   creator: "CITAM Kitale",
-  metadataBase: new URL("https://citamkitale.org"), // Set the base URL for metadata
+  metadataBase: new URL("https://citamkitale.org"),
   openGraph: {
     title: "CITAM Kitale | Christ is The Answer Ministries",
     description:
@@ -67,7 +65,7 @@ export const metadata = {
   manifest: "/site.webmanifest",
 };
 
-// Root layout component with proper TypeScript typing
+// Root layout component
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -99,7 +97,6 @@ export default function RootLayout({
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
       </head>
       <body className={cn("min-h-screen bg-background", inter.className)}>
-
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -107,6 +104,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <div className="px-4 py-2 flex justify-end">
+            <ThemeToggle />
+          </div>
           {children}
           <Footer />
         </ThemeProvider>
