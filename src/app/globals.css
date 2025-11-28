@@ -64,3 +64,21 @@
  html, body {
  / Tailwind classes (require tailwind.config.js mapping) /
  @apply bg-background text-foreground;
+}
+}
+
+/ Optional: card example /
+ .card {
+ background-color: hsl(var(--card));
+ color: hsl(var(--card-foreground));
+ border-radius: var(--radius);
+ border: 1px solid hsl(var(--border));
+ }
+}
+
+/ components /
+@layer components {
+ .font-heading {
+ @apply font-sans font-bold;
+ }
+}
