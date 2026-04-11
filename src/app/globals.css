@@ -1,78 +1,116 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ✅ Tailwind v4 import syntax */
+@import "tailwindcss";
+
+/* ✅ Tell Tailwind v4 about your CSS variables so it generates utilities */
+@theme {
+  /* Brand color — single source of truth.
+     Change this one line to retheme the entire site. */
+  --color-brand: oklch(0.45 0.22 27);        /* red-600 equivalent */
+  --color-brand-hover: oklch(0.39 0.20 27);  /* red-700 equivalent */
+
+  /* Wire up the Inter font variable set in layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+}
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* white */
-    --foreground: 0 0% 3.9%; /* very dark gray */
-    --card: 0 0% 100%; /* light red tint */
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%; /* deeper red */
-    --primary-foreground: 0 0% 98%; /* near-white */
-    --secondary: 0 0% 96.1%; /* light gray */
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%; /* black */
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    /* ✅ Tailwind v4 uses direct oklch/hex values, not space-separated HSL */
+    --background: oklch(1 0 0);           /* white */
+    --foreground: oklch(0.09 0 0);        /* near-black */
+
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.09 0 0);
+
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.09 0 0);
+
+    --primary: oklch(0.45 0.22 27);       /* ✅ brand red — matches site's red-600 */
+    --primary-foreground: oklch(0.98 0 0);
+
+    --secondary: oklch(0.96 0 0);
+    --secondary-foreground: oklch(0.09 0 0);
+
+    --muted: oklch(0.96 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+
+    --accent: oklch(0.96 0 0);
+    --accent-foreground: oklch(0.09 0 0);
+
+    --destructive: oklch(0.58 0.22 27);
+    --destructive-foreground: oklch(0.98 0 0);
+
+    --border: oklch(0.89 0 0);
+    --input: oklch(0.89 0 0);
+    --ring: oklch(0.45 0.22 27);          /* ✅ ring matches brand, not black */
+
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
   }
 
   .dark {
-    --background: 0 0% 3.9%; /* very dark gray */
-    --foreground: 0 0% 98%; /* near-white */
-    --card: 0 0% 3.9%; /* dark gray */
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%; /* deeper red */
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%; /* medium dark gray */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%; /* lighter dark gray */
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%; /* lighter red */
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
+    /* ✅ Warm dark — slightly warm gray instead of pure black */
+    --background: oklch(0.13 0.005 60);   /* warm charcoal, not pure #0a0a0a */
+    --foreground: oklch(0.96 0 0);
 
-@layer base {
-  /* * {
-    @apply border-border;
-  } */
+    --card: oklch(0.16 0.005 60);         /* slightly lighter than bg */
+    --card-foreground: oklch(0.96 0 0);
+
+    --popover: oklch(0.16 0.005 60);
+    --popover-foreground: oklch(0.96 0 0);
+
+    --primary: oklch(0.55 0.20 27);       /* ✅ slightly lighter red for dark bg contrast */
+    --primary-foreground: oklch(0.98 0 0);
+
+    --secondary: oklch(0.20 0.005 60);
+    --secondary-foreground: oklch(0.96 0 0);
+
+    --muted: oklch(0.20 0.005 60);
+    --muted-foreground: oklch(0.65 0 0);
+
+    --accent: oklch(0.20 0.005 60);
+    --accent-foreground: oklch(0.96 0 0);
+
+    --destructive: oklch(0.45 0.18 27);
+    --destructive-foreground: oklch(0.98 0 0);
+
+    --border: oklch(0.22 0.005 60);
+    --input: oklch(0.22 0.005 60);
+    --ring: oklch(0.55 0.20 27);
+  }
+
+  html,
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  /* h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-  } */
+
+  /* ✅ Consistent focus ring across all interactive elements */
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
+/* ✅ Removed .card — shadcn owns this. Removed .font-heading — not distinct enough. */
 @layer components {
-  .font-heading {
-    @apply font-sans font-bold;
+  /* Brand button utility — replaces hardcoded bg-red-600 across all JSX */
+  .btn-brand {
+    @apply bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white rounded-lg transition-colors duration-200;
+  }
+
+  /* Consistent section heading style */
+  .section-heading {
+    @apply text-2xl md:text-3xl font-bold text-center;
+    color: var(--foreground);
+  }
+
+  .section-heading span {
+    color: var(--primary);
   }
 }

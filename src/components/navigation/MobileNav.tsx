@@ -1,12 +1,11 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Home, Info, Mic, Calendar, Users, Heart, Phone, Image } from "lucide-react";
-import { Button } from "../../components/ui/button";
-import { ThemeToggle } from "../ui/theme-toggle";
+// ✅ No ThemeToggle — already in Header.tsx, would render twice here
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
@@ -23,90 +22,108 @@ const MobileNav: React.FC<{
   id?: string;
   isOpen: boolean;
   onClose: () => void;
-}> = ({
-  id = "mobile-nav",
-  isOpen,
-  onClose,
-}) => {
+}> = ({ id = "mobile-nav", isOpen, onClose }) => {
   const pathname = usePathname();
 
   return (
-    <div>
-      <AnimatePresence>
-        {isOpen && (
+    // ✅ AnimatePresence directly in return — no pointless wrapper div
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* ✅ Overlay and panel are siblings — no fragile stopPropagation needed */}
           <motion.div
+            key="overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/50"
+            className="fixed inset-0 z-40 bg-black/50"
             onClick={onClose}
+            aria-hidden="true" // ✅ overlay is decorative, not interactive for screen readers
+          />
+
+          {/* ✅ Side drawer from right — standard mobile nav pattern, doesn't fight the header */}
+          <motion.nav
+            key="panel"
+            id={id}
+            role="dialog"           // ✅ screen readers treat this as a modal
+            aria-modal="true"       // ✅ traps virtual cursor inside
+            aria-label="Mobile navigation"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-background shadow-xl"
           >
-            <motion.nav
-              id={id}
-              initial={{ y: "-100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-100%" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg"
-              aria-label="Mobile navigation"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="container mx-auto px-4 py-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-bold text-black">Menu</h2>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={onClose}
-                    aria-label="Close menu"
-                  >
-                    <X className="h-6 w-6 text-black" />
-                  </Button>
-                </div>
-                <div className="flex flex-col space-y-4">
-                  {navItems.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = pathname === item.href;
-                    return (
-                      <Button
-                        key={item.name}
-                        variant={isActive ? "default" : "ghost"}
-                        asChild
-                        className={`
-                          w-full justify-start px-4 py-3 rounded-md transition-all duration-200
-                          ${isActive
-                            ? "bg-red-600 text-white hover:bg-red-700"
-                            : "text-black hover:bg-red-100 hover:text-red-900"}
-                        `}
-                      >
-                        <Link
-                          href={item.href}
-                          className="flex items-center space-x-3"
-                          aria-current={isActive ? "page" : undefined}
-                          onClick={onClose}
-                        >
-                          <Icon
-                            className={`h-5 w-5 ${
-                              isActive ? "text-white" : "text-black"
-                            }`}
-                          />
-                          <span>{item.name}</span>
-                        </Link>
-                      </Button>
-                    );
-                  })}
-                  {/* Place ThemeToggle inside the menu */}
-                  <div className="mt-4">
-                    <ThemeToggle />
-                  </div>
-                </div>
+            <div className="flex flex-col h-full px-4 py-6">
+
+              {/* Header row */}
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-lg font-semibold text-foreground">Menu</h2>
+                <button
+                  onClick={onClose}
+                  aria-label="Close menu"
+                  className="p-2 rounded-md text-foreground hover:bg-accent
+                    focus-visible:outline-none focus-visible:ring-2
+                    focus-visible:ring-ring focus-visible:ring-offset-2
+                    transition-colors duration-200"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+
+              {/* Nav links */}
+              <div className="flex flex-col space-y-1">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  // ✅ startsWith for nested route matching
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.href);
+
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={onClose}
+                      className={cn(
+                        // ✅ Plain Link — no Button/variant specificity fight
+                        "flex items-center space-x-3 px-3 py-3 rounded-md text-sm font-medium",
+                        "transition-colors duration-200",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                        isActive
+                          ? "bg-primary text-primary-foreground"           // ✅ design token
+                          : "text-foreground hover:bg-accent hover:text-accent-foreground"
+                      )}
+                    >
+                      <Icon className="h-5 w-5 flex-shrink-0" /> {/* ✅ icon color inherits from text — no hardcoding */}
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* ✅ Push Give CTA to bottom for visual hierarchy */}
+              <div className="mt-auto pt-6 border-t border-border">
+                <Link
+                  href="/give"
+                  onClick={onClose}
+                  className="flex items-center justify-center w-full px-4 py-3
+                    bg-primary text-primary-foreground rounded-md text-sm font-medium
+                    hover:bg-primary/90 transition-colors duration-200"
+                >
+                  <Heart className="h-4 w-4 mr-2" />
+                  Give Online
+                </Link>
+              </div>
+
+            </div>
+          </motion.nav>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 
