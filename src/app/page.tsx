@@ -1,5 +1,5 @@
-"use client";
-import Head from "next/head";
+// No "use client" — this is now a Server Component
+import { Metadata } from "next";
 import HeroSection from "../components/sections/hero-section";
 import SermonCard from "../components/SermonCard";
 import EventCard from "../components/sections/event-card";
@@ -15,8 +15,83 @@ import WelcomeSection from "../components/sections/welcome-section";
 import BibleVerseSection from "../components/sections/bible-verse-section";
 import TestimonialSection from "../components/sections/testimonials";
 
+// ✅ App Router metadata — replaces <Head>
+export const metadata: Metadata = {
+  title: "CITAM Kitale | Christ is The Answer Ministries",
+  description:
+    "CITAM Kitale is a vibrant church dedicated to sharing the love of Christ and making disciples in Kitale and beyond. Join us for Sunday services, youth programs, and community outreach.",
+  keywords: [
+    "CITAM", "Kitale", "church", "Christian", "ministry",
+    "gospel", "Jesus", "Christ", "worship", "sermons", "events",
+  ],
+  authors: [{ name: "CITAM Kitale" }],
+  robots: { index: true, follow: true },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  // ✅ Open Graph for WhatsApp / Facebook previews
+  openGraph: {
+    title: "CITAM Kitale | Christ is The Answer Ministries",
+    description:
+      "A vibrant church dedicated to sharing the love of Christ in Kitale, Kenya. Join us this Sunday.",
+    url: "https://citam-kitale.vercel.app",
+    siteName: "CITAM Kitale",
+    images: [{ url: "/citamKitale1.jpg", width: 1200, height: 630 }],
+    locale: "en_KE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CITAM Kitale | Christ is The Answer Ministries",
+    description: "A vibrant church in Kitale, Kenya. Join us this Sunday.",
+    images: ["/citamKitale1.jpg"],
+  },
+};
 
-// Reusable Section component for consistent layout
+// ✅ Structured data as a standalone component — keeps JSX clean
+const churchStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Church", // more specific than Organization
+  name: "CITAM Kitale",
+  description:
+    "Christ is The Answer Ministries Kitale — a vibrant church dedicated to sharing the love of Christ.",
+  url: "https://citam-kitale.vercel.app",
+  logo: "https://citam-kitale.vercel.app/logo.png",
+  image: "https://citam-kitale.vercel.app/citamKitale1.jpg",
+  telephone: "+254712345678",
+  email: "info@citamkitale.org",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Kitale Town",
+    addressLocality: "Kitale",
+    addressRegion: "Trans Nzoia County",
+    addressCountry: "KE",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "08:00",
+      closes: "12:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Wednesday",
+      opens: "17:30",
+      closes: "19:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Friday",
+      opens: "18:00",
+      closes: "20:00",
+    },
+  ],
+};
+
+// Reusable Section component — unchanged, no issues here
 const Section: React.FC<{
   title: React.ReactNode;
   description?: string;
@@ -39,32 +114,8 @@ const Section: React.FC<{
 );
 
 export default function Home() {
-  const pageTitle = "CITAM Kitale | Christ is The Answer Ministries";
-  const pageDescription =
-    "CITAM Kitale is a vibrant church dedicated to sharing the love of Christ and making disciples in Kitale and beyond. Join us for Sunday services, youth programs, and community outreach.";
-
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content="CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events"
-        />
-        <meta name="author" content="CITAM Kitale" />
-        <meta name="creator" content="CITAM Kitale" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="max-image-preview" content="large" />
-        <meta name="max-video-preview" content="-1" />
-        <meta name="max-snippet" content="-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/logo.png" />
-        <link rel="shortcut icon" href="/logo.png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
-      </Head>
-
       <main>
         <HeroSection />
         <ServiceTimesBanner />
@@ -73,11 +124,7 @@ export default function Home() {
 
         {/* Latest Sermons */}
         <Section
-          title={
-            <>
-              Latest <span className="text-red-600">Sermons</span>
-            </>
-          }
+          title={<>Latest <span className="text-red-600">Sermons</span></>}
           description="Missed a service? Catch up on our recent messages and continue your spiritual journey."
           bgClass="bg-white"
         >
@@ -91,10 +138,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button
-              asChild
-              className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2"
-            >
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
               <Link href="/sermons">View All Sermons</Link>
             </Button>
           </div>
@@ -102,11 +146,7 @@ export default function Home() {
 
         {/* Upcoming Events */}
         <Section
-          title={
-            <>
-              Upcoming <span className="text-red-600">Events</span>
-            </>
-          }
+          title={<>Upcoming <span className="text-red-600">Events</span></>}
           description="Join us for these special gatherings and activities as we grow together in faith and fellowship."
           bgClass="bg-gray-100"
         >
@@ -116,10 +156,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button
-              asChild
-              className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2"
-            >
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
               <Link href="/events">View All Events</Link>
             </Button>
           </div>
@@ -127,11 +164,7 @@ export default function Home() {
 
         {/* Ministries */}
         <Section
-          title={
-            <>
-              Our <span className="text-red-600">Ministries</span>
-            </>
-          }
+          title={<>Our <span className="text-red-600">Ministries</span></>}
           description="Discover how you can get involved, serve others, and grow in your faith through our various ministries."
           bgClass="bg-white"
         >
@@ -145,10 +178,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button
-              asChild
-              className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2"
-            >
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
               <Link href="/ministries">Explore All Ministries</Link>
             </Button>
           </div>
@@ -158,24 +188,10 @@ export default function Home() {
         <NewsletterSignup />
       </main>
 
-      {/* Structured Data for SEO */}
+      {/* ✅ Structured data inside the fragment, after <main> — correct placement */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "CITAM Kitale",
-            description: pageDescription,
-            url: "https://citamkitale.org",
-            logo: "/logo.png",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Kitale",
-              addressCountry: "KE",
-            },
-          }),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(churchStructuredData) }}
       />
     </>
   );
