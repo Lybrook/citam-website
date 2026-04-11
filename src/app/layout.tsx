@@ -1,42 +1,50 @@
 import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/navigation/header";
 import Footer from "../components/navigation/footer";
 import { ThemeProvider } from "../components/ui/theme-provider";
-import ThemeToggle from "../components/theme-toggle";
 import { cn } from "../utils";
 
-// Configure fonts
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-sans", // ✅ keep as variable, reference via CSS
 });
 
-// Define metadata for the application
-export const metadata = {
-  title: "CITAM Kitale | Christ is The Answer Ministries",
+// ✅ Single source of truth — Next.js injects all of this automatically
+export const metadata: Metadata = {
+  // ✅ Use a template so child pages can set their own title cleanly
+  title: {
+    default: "CITAM Kitale | Christ is The Answer Ministries",
+    template: "%s | CITAM Kitale",
+  },
   description:
     "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
-  keywords:
-    "CITAM, Kitale, church, Christian, ministry, gospel, Jesus, Christ, worship, sermons, events",
+  // ✅ keywords as array, not string
+  keywords: [
+    "CITAM", "Kitale", "church", "Christian", "ministry",
+    "gospel", "Jesus", "Christ", "worship", "sermons", "events",
+  ],
   authors: [{ name: "CITAM Kitale" }],
   creator: "CITAM Kitale",
-  metadataBase: new URL("https://citamkitale.org"),
+  // ✅ metadataBase is essential — resolves relative image paths like "/logo.png"
+  metadataBase: new URL("https://citam-kitale.vercel.app"),
   openGraph: {
     title: "CITAM Kitale | Christ is The Answer Ministries",
     description:
       "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
-    url: "https://citamkitale.org",
+    url: "https://citam-kitale.vercel.app",
     siteName: "CITAM Kitale",
     images: [
       {
-        url: "/logo.png",
+        // ✅ Real church photo — not the logo — for engaging link previews
+        url: "/citamKitale1.jpg",
         width: 1200,
         height: 630,
-        alt: "CITAM Kitale",
+        alt: "CITAM Kitale Church — Kitale, Kenya",
       },
     ],
-    locale: "en_US",
+    locale: "en_KE", // ✅ was en_US
     type: "website",
   },
   twitter: {
@@ -44,7 +52,7 @@ export const metadata = {
     title: "CITAM Kitale | Christ is The Answer Ministries",
     description:
       "Welcome to CITAM Kitale, a ministry dedicated to spreading the gospel of Jesus Christ throughout Kitale and beyond.",
-    images: ["/logo.png"],
+    images: ["/citamKitale1.jpg"], // ✅ match OG image
   },
   robots: {
     index: true,
@@ -65,48 +73,36 @@ export const metadata = {
   manifest: "/site.webmanifest",
 };
 
-// Root layout component
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
+    // ✅ suppressHydrationWarning needed for next-themes — correct
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/logo.png" />
-        <link rel="Citam" href="/logo.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="author" content={metadata.authors[0].name} />
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:site_name" content={metadata.openGraph.siteName} />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
-        <meta property="og:locale" content={metadata.openGraph.locale} />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta name="twitter:description" content={metadata.twitter.description} />
-        <meta name="twitter:image" content={metadata.twitter.images[0]} />
-      </head>
-      <body className={cn("min-h-screen bg-background", inter.className)}>
+      {/*
+        ✅ No manual <head> block — Next.js injects everything from
+           the metadata export above. Manual tags were causing duplicates.
+      */}
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.variable // ✅ .variable not .className — sets --font-sans CSS var
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          {/*
+            ✅ ThemeToggle removed from here — move it inside Header component.
+               A floating div between Header and content breaks layout flow
+               and looks broken on every page.
+          */}
           <Header />
-          <div className="px-4 py-2 flex justify-end">
-            <ThemeToggle />
-          </div>
           {children}
           <Footer />
         </ThemeProvider>
