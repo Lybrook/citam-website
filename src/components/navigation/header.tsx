@@ -1,113 +1,62 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import { Menu, X } from "lucide-react"; // ✅ Removed unused Church import
+
+import React, { useCallback, useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import ThemeToggle from "../theme-toggle"; // ✅ Moved here from layout.tsx
+import ThemeToggle from "../ui/theme-toggle";
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
-  // ✅ Removed typeof window check — unnecessary in "use client" components
-  const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 10);
-  }, []);
+  const handleScroll = useCallback(() => setScrolled(window.scrollY > 12), []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true }); // ✅ passive improves scroll performance
-    handleScroll(); // set initial state
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const handleMobileNavToggle = () => {
-    setIsMobileNavOpen((prev) => !prev);
-  };
-
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      const mobileNavElement = document.getElementById("mobile-nav");
-      const toggleButton = document.getElementById("mobile-nav-toggle");
-      if (
-        isMobileNavOpen &&
-        mobileNavElement &&
-        toggleButton &&
-        !mobileNavElement.contains(event.target as Node) &&
-        !toggleButton.contains(event.target as Node)
-      ) {
-        setIsMobileNavOpen(false);
-      }
+    if (!isMobileNavOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileNavOpen(false);
     };
-
-    if (isMobileNavOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto"; // ✅ "auto" not "unset"
-    }
-
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.body.style.overflow = "auto"; // ✅ consistent cleanup
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
     };
   }, [isMobileNavOpen]);
 
   return (
-    <header
-      className={`
-        fixed top-0 left-0 right-0 z-50
-        transition-all duration-300 ease-in-out
-        ${scrolled
-          // ✅ bg-background respects dark mode. border uses CSS variable.
-          ? "bg-background/95 backdrop-blur-md shadow-md border-b border-border py-2"
-          : "bg-background py-4"
-        }
-      `}
-    >
-      <div className="container mx-auto px-4 flex items-center justify-between">
-
-        {/* Logo — opacity transition instead of scale to avoid layout shift */}
-        <div className="flex items-center space-x-2 transition-opacity duration-200 hover:opacity-80">
-          <Logo />
-        </div>
-
-        {/* Desktop Navigation + Theme Toggle */}
-        <div className="hidden lg:flex items-center space-x-6">
+    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-border/80 bg-background/90 py-2 shadow-lg backdrop-blur-xl" : "border-transparent bg-background/80 py-4 backdrop-blur-md"}`}>
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6">
+        <Logo />
+        <div className="hidden items-center gap-6 lg:flex">
           <DesktopNav />
-          <ThemeToggle /> {/* ✅ Lives here, not floating in layout.tsx */}
+          <ThemeToggle />
         </div>
-
-        {/* Mobile: Theme Toggle + Hamburger */}
-        <div className="flex lg:hidden items-center space-x-2">
-          <ThemeToggle /> {/* ✅ Also accessible on mobile */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
           <Button
             id="mobile-nav-toggle"
             variant="ghost"
             size="icon"
-            className="text-foreground hover:text-primary focus-visible:ring-2
-              focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full
-              transition-colors duration-200"
-            onClick={handleMobileNavToggle}
+            onClick={() => setIsMobileNavOpen((open) => !open)}
             aria-label={isMobileNavOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={isMobileNavOpen}
             aria-controls="mobile-nav"
           >
-            {isMobileNavOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMobileNavOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </div>
-
-      <MobileNav
-        id="mobile-nav"
-        isOpen={isMobileNavOpen}
-        onClose={handleMobileNavToggle}
-      />
+      <MobileNav id="mobile-nav" isOpen={isMobileNavOpen} onClose={() => setIsMobileNavOpen(false)} />
     </header>
   );
 };
