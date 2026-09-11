@@ -23,6 +23,7 @@
   --red: #d71920;
   --red-dark: #a80f16;
   --black: #111111;
+  --navy: var(--black);
   --black-soft: #242424;
   --cream: #ffffff;
   --paper: #ffffff;
@@ -31,12 +32,14 @@
   --muted-ink: #666666;
   --line: #e4e4e1;
   --gold: #e9b949;
+  --gold-deep: #9a6a00;
 }
 
 .dark {
   --red: #ef3a40;
   --red-dark: #ff5459;
   --black: #050505;
+  --navy: var(--black);
   --black-soft: #161616;
   --cream: #101010;
   --paper: #191919;
@@ -45,6 +48,7 @@
   --muted-ink: #b8b8b3;
   --line: #373737;
   --gold: #f3c75d;
+  --gold-deep: #f3c75d;
   color-scheme: dark;
 }
 
