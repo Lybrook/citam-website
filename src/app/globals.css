@@ -1,137 +1,78 @@
-/* ✅ Tailwind v4 import syntax */
 @import "tailwindcss";
 
-/* ✅ Tell Tailwind v4 about your CSS variables so it generates utilities */
 @theme {
-  /* Brand color — single source of truth.
-     Change this one line to retheme the entire site. */
-  --color-brand: oklch(0.45 0.22 27);        /* red-600 equivalent */
-  --color-brand-hover: oklch(0.39 0.20 27);  /* red-700 equivalent */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  /* Wire up the Inter font variable set in layout.tsx */
+  --color-background: var(--cream);
+  --color-foreground: var(--ink);
+  --color-card: var(--paper);
+  --color-card-foreground: var(--ink);
+  --color-primary: var(--red);
+  --color-primary-foreground: #fff;
+  --color-secondary: var(--black);
+  --color-secondary-foreground: #fff;
+  --color-muted: var(--sand);
+  --color-muted-foreground: var(--muted-ink);
+  --color-accent: var(--gold);
+  --color-accent-foreground: var(--black);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--red);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
 }
 
-/* Global theme tokens and base styles */
-  :root {
-    /* ✅ Tailwind v4 uses direct oklch/hex values, not space-separated HSL */
-    --background: oklch(1 0 0);           /* white */
-    --foreground: oklch(0.09 0 0);        /* near-black */
+:root {
+  --red: #d71920;
+  --red-dark: #a80f16;
+  --black: #111111;
+  --navy: var(--black);
+  --black-soft: #242424;
+  --cream: #ffffff;
+  --paper: #ffffff;
+  --sand: #f5f5f3;
+  --ink: #171717;
+  --muted-ink: #666666;
+  --line: #e4e4e1;
+  --gold: #e9b949;
+  --gold-deep: #9a6a00;
+}
 
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.09 0 0);
+.dark {
+  --red: #ef3a40;
+  --red-dark: #ff5459;
+  --black: #050505;
+  --navy: var(--black);
+  --black-soft: #161616;
+  --cream: #101010;
+  --paper: #191919;
+  --sand: #232323;
+  --ink: #f7f7f5;
+  --muted-ink: #b8b8b3;
+  --line: #373737;
+  --gold: #f3c75d;
+  --gold-deep: #f3c75d;
+  color-scheme: dark;
+}
 
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.09 0 0);
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { min-width: 320px; overflow-x: clip; background: var(--cream); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--red); color: #fff; }
+img { max-width: 100%; }
+a, button { -webkit-tap-highlight-color: transparent; }
+*:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 
-    --primary: oklch(0.45 0.22 27);       /* ✅ brand red — matches site's red-600 */
-    --primary-foreground: oklch(0.98 0 0);
+.dark .bg-white { background-color: var(--paper) !important; }
+.dark .text-black { color: var(--ink) !important; }
+.dark .text-gray-900 { color: var(--ink) !important; }
+.dark .border-gray-200, .dark .border-gray-300 { border-color: var(--line) !important; }
 
-    --secondary: oklch(0.96 0 0);
-    --secondary-foreground: oklch(0.09 0 0);
+.container-shell { width: min(1180px, calc(100% - 2rem)); margin-inline: auto; }
+.display-heading { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-weight: 400; letter-spacing: .01em; text-transform: uppercase; }
+.eyebrow { color: var(--red); font-size: .7rem; font-weight: 900; letter-spacing: .19em; line-height: 1.2; text-transform: uppercase; }
+.section-pad { padding-block: 5rem; }
+.editorial-card { border: 1px solid var(--line); background: var(--paper); box-shadow: 0 12px 35px rgb(0 0 0 / .06); transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+.editorial-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--red) 45%, var(--line)); box-shadow: 0 20px 50px rgb(0 0 0 / .12); }
+.image-zoom img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.image-zoom:hover img { transform: scale(1.05); }
+.section-rule { height: 4px; width: 48px; background: var(--red); }
 
-    --muted: oklch(0.96 0 0);
-    --muted-foreground: oklch(0.45 0 0);
-
-    --accent: oklch(0.96 0 0);
-    --accent-foreground: oklch(0.09 0 0);
-
-    --destructive: oklch(0.58 0.22 27);
-    --destructive-foreground: oklch(0.98 0 0);
-
-    --border: oklch(0.89 0 0);
-    --input: oklch(0.89 0 0);
-    --ring: oklch(0.45 0.22 27);          /* ✅ ring matches brand, not black */
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    /* ✅ Warm dark — slightly warm gray instead of pure black */
-    --background: oklch(0.13 0.005 60);   /* warm charcoal, not pure #0a0a0a */
-    --foreground: oklch(0.96 0 0);
-
-    --card: oklch(0.16 0.005 60);         /* slightly lighter than bg */
-    --card-foreground: oklch(0.96 0 0);
-
-    --popover: oklch(0.16 0.005 60);
-    --popover-foreground: oklch(0.96 0 0);
-
-    --primary: oklch(0.55 0.20 27);       /* ✅ slightly lighter red for dark bg contrast */
-    --primary-foreground: oklch(0.98 0 0);
-
-    --secondary: oklch(0.20 0.005 60);
-    --secondary-foreground: oklch(0.96 0 0);
-
-    --muted: oklch(0.20 0.005 60);
-    --muted-foreground: oklch(0.65 0 0);
-
-    --accent: oklch(0.20 0.005 60);
-    --accent-foreground: oklch(0.96 0 0);
-
-    --destructive: oklch(0.45 0.18 27);
-    --destructive-foreground: oklch(0.98 0 0);
-
-    --border: oklch(0.22 0.005 60);
-    --input: oklch(0.22 0.005 60);
-    --ring: oklch(0.55 0.20 27);
-  }
-
-  html,
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-
-  body { min-width: 320px; }
-  ::selection { background: var(--primary); color: var(--primary-foreground); }
-  img { max-width: 100%; }
-
-  /* ✅ Consistent focus ring across all interactive elements */
-  *:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-/* ✅ Removed .card — shadcn owns this. Removed .font-heading — not distinct enough. */
-  /* Brand button utility — replaces hardcoded bg-red-600 across all JSX */
-  .btn-brand {
-    @apply bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white rounded-lg transition-colors duration-200;
-  }
-
-  /* Consistent section heading style */
-  .section-heading {
-    @apply text-2xl md:text-3xl font-bold text-center;
-    color: var(--foreground);
-  }
-
-  .section-heading span {
-    color: var(--primary);
-  }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
