@@ -1,40 +1,7 @@
-// @/src/app/data/events.ts
-export interface Event {
-  id: number;
-  title: string;
-  date: string;
-  time: string;
-  location: string;
-  image: string;
-  slug: string;
-}
+export interface Event { id: number; title: string; date: string; time: string; location: string; image: string; slug: string; }
 
 export const upcomingEvents: Event[] = [
-  {
-    id: 1,
-    title: "Youth Conference",
-    date: "April 10-12, 2025",
-    time: "9:00 AM - 5:00 PM",
-    location: "CITAM Kitale Main Hall",
-    image: "/youthMinistry.jpg",
-    slug: "youth-conference",
-  },
-  {
-    id: 2,
-    title: "Women's Retreat",
-    date: "April 25, 2025",
-    time: "10:00 AM - 4:00 PM",
-    location: "CITAM Kitale Gardens",
-    image: "/inStepWithTheSpirit.jpg",
-    slug: "womens-retreat",
-  },
-  {
-    id: 3,
-    title: "Men's Fellowship",
-    date: "May 3, 2025",
-    time: "8:00 AM - 12:00 PM",
-    location: "CITAM Kitale Conference Room",
-    image: "/menMinistry.jpg",
-    slug: "mens-fellowship",
-  },
+  { id: 1, title: "Sunday Worship", date: "Every Sunday", time: "8:00 AM and 10:30 AM", location: "CITAM Kitale Main Hall", image: "/citamKitale1.jpg", slug: "sunday-worship" },
+  { id: 2, title: "Midweek Prayer Service", date: "Every Wednesday", time: "5:30 PM - 7:00 PM", location: "CITAM Kitale", image: "/powerOfPrayer.jpg", slug: "midweek-prayer" },
+  { id: 3, title: "Men's Fellowship", date: "Monthly gathering", time: "See current announcement", location: "CITAM Kitale Conference Room", image: "/menMinistry.jpg", slug: "mens-fellowship" },
 ];

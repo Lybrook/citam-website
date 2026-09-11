@@ -1,198 +1,30 @@
-// No "use client" — this is now a Server Component
-import { Metadata } from "next";
-import HeroSection from "../components/sections/hero-section";
-import SermonCard from "../components/SermonCard";
-import EventCard from "../components/sections/event-card";
-import NewsletterSignup from "../components/sections/newsletter-signup";
-import { Button } from "../components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, CalendarDays, Clock3, MapPin, Phone, Play, Users, HeartHandshake } from "lucide-react";
 import { latestSermons } from "./data/sermons";
 import { upcomingEvents } from "./data/events";
 import { ministries } from "./data/ministries";
-import MinistryCard from "../components/MinistryCard";
-import ServiceTimesBanner from "../components/sections/service-times-banner";
-import WelcomeSection from "../components/sections/welcome-section";
-import BibleVerseSection from "../components/sections/bible-verse-section";
-import TestimonialSection from "../components/sections/testimonials";
-
-// ✅ App Router metadata — replaces <Head>
-export const metadata: Metadata = {
-  title: "CITAM Kitale | Christ is The Answer Ministries",
-  description:
-    "CITAM Kitale is a vibrant church dedicated to sharing the love of Christ and making disciples in Kitale and beyond. Join us for Sunday services, youth programs, and community outreach.",
-  keywords: [
-    "CITAM", "Kitale", "church", "Christian", "ministry",
-    "gospel", "Jesus", "Christ", "worship", "sermons", "events",
-  ],
-  authors: [{ name: "CITAM Kitale" }],
-  robots: { index: true, follow: true },
-  icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
-  },
-  // ✅ Open Graph for WhatsApp / Facebook previews
-  openGraph: {
-    title: "CITAM Kitale | Christ is The Answer Ministries",
-    description:
-      "A vibrant church dedicated to sharing the love of Christ in Kitale, Kenya. Join us this Sunday.",
-    url: "https://citam-kitale.vercel.app",
-    siteName: "CITAM Kitale",
-    images: [{ url: "/citamKitale1.jpg", width: 1200, height: 630 }],
-    locale: "en_KE",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "CITAM Kitale | Christ is The Answer Ministries",
-    description: "A vibrant church in Kitale, Kenya. Join us this Sunday.",
-    images: ["/citamKitale1.jpg"],
-  },
-};
-
-// ✅ Structured data as a standalone component — keeps JSX clean
-const churchStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "Church", // more specific than Organization
-  name: "CITAM Kitale",
-  description:
-    "Christ is The Answer Ministries Kitale — a vibrant church dedicated to sharing the love of Christ.",
-  url: "https://citam-kitale.vercel.app",
-  logo: "https://citam-kitale.vercel.app/logo.png",
-  image: "https://citam-kitale.vercel.app/citamKitale1.jpg",
-  telephone: "+254712345678",
-  email: "info@citamkitale.org",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Kitale Town",
-    addressLocality: "Kitale",
-    addressRegion: "Trans Nzoia County",
-    addressCountry: "KE",
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Sunday",
-      opens: "08:00",
-      closes: "12:30",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Wednesday",
-      opens: "17:30",
-      closes: "19:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Friday",
-      opens: "18:00",
-      closes: "20:00",
-    },
-  ],
-};
-
-// Reusable Section component — unchanged, no issues here
-const Section: React.FC<{
-  title: React.ReactNode;
-  description?: string;
-  children: React.ReactNode;
-  bgClass?: string;
-}> = ({ title, description, children, bgClass = "bg-white" }) => (
-  <section className={`py-16 md:py-24 ${bgClass}`}>
-    <div className="container mx-auto px-4">
-      <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center text-black">
-        {title}
-      </h2>
-      {description && (
-        <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-          {description}
-        </p>
-      )}
-      {children}
-    </div>
-  </section>
-);
+import { testimonials } from "./data/testimonials";
+import HeroSlider from "../components/site/hero-slider";
+import { Reveal } from "../components/site/reveal";
+import { SectionHeading } from "../components/site/section-heading";
 
 export default function Home() {
-  return (
-    <>
-      <main>
-        <HeroSection />
-        <ServiceTimesBanner />
-        <WelcomeSection />
-        <BibleVerseSection />
+  return <main>
+    <section className="relative isolate overflow-hidden bg-[var(--black)] pt-28 text-white md:pt-32"><HeroSlider /><div className="container-shell relative flex min-h-[590px] items-center pb-24"><div className="max-w-3xl"><p className="eyebrow text-[var(--gold)]">CITAM Kitale · Christ is the Answer</p><h1 className="mt-5 max-w-3xl text-6xl font-black leading-[.92] tracking-[-.05em] sm:text-8xl lg:text-[7.5rem]">A church for<br /><span className="text-[var(--red)]">real life.</span></h1><p className="mt-7 max-w-xl text-lg leading-8 text-white/80">Come and worship with us in Kitale. Find a warm community, biblical teaching, and practical ways to grow and serve.</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/events" className="rounded bg-[var(--red)] px-6 py-4 text-xs font-black uppercase tracking-[.14em] text-white transition hover:bg-[var(--red-dark)]">Plan your visit <ArrowRight className="ml-2 inline" size={16} /></Link><Link href="/about" className="rounded border border-white/50 px-6 py-4 text-xs font-black uppercase tracking-[.14em] text-white transition hover:bg-white hover:text-[var(--black)]">Who we are</Link></div></div></div><div className="absolute bottom-0 left-0 h-14 w-full bg-[var(--cream)] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)]" /></section>
 
-        {/* Latest Sermons */}
-        <Section
-          title={<>Latest <span className="text-red-600">Sermons</span></>}
-          description="Missed a service? Catch up on our recent messages and continue your spiritual journey."
-          bgClass="bg-white"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestSermons.map((sermon) => (
-              <SermonCard
-                key={sermon.id}
-                sermon={sermon}
-                className="shadow-sm hover:shadow-md transition-shadow duration-300"
-              />
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
-              <Link href="/sermons">View All Sermons</Link>
-            </Button>
-          </div>
-        </Section>
+    <section className="border-b border-[var(--line)] bg-[var(--cream)] py-6"><div className="container-shell grid gap-5 md:grid-cols-3"><div className="flex items-start gap-4 border-b border-[var(--line)] pb-5 md:border-b-0 md:border-r md:pb-0"><Clock3 className="mt-1 text-[var(--red)]" /><div><p className="eyebrow">Sunday worship</p><p className="mt-1 font-bold">8:00 AM and 10:30 AM</p><p className="mt-1 text-sm text-[var(--muted-ink)]">Join us in person at the Kitale campus.</p></div></div><div className="flex items-start gap-4 border-b border-[var(--line)] pb-5 md:border-b-0 md:border-r md:pb-0"><MapPin className="mt-1 text-[var(--red)]" /><div><p className="eyebrow">Find us</p><p className="mt-1 font-bold">Kitale Town, Trans Nzoia</p><p className="mt-1 text-sm text-[var(--muted-ink)]">Directions and visitor help are available.</p></div></div><div className="flex items-start gap-4"><Phone className="mt-1 text-[var(--red)]" /><div><p className="eyebrow">Talk to the church</p><a href="tel:+254712345678" className="mt-1 block font-bold hover:text-[var(--red)]">+254 712 345 678</a><p className="mt-1 text-sm text-[var(--muted-ink)]">Questions, prayer, or next steps.</p></div></div></div></section>
 
-        {/* Upcoming Events */}
-        <Section
-          title={<>Upcoming <span className="text-red-600">Events</span></>}
-          description="Join us for these special gatherings and activities as we grow together in faith and fellowship."
-          bgClass="bg-gray-100"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
-              <Link href="/events">View All Events</Link>
-            </Button>
-          </div>
-        </Section>
+    <section className="section-pad bg-[var(--cream)]"><div className="container-shell grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center"><Reveal><div><p className="eyebrow">Welcome to CITAM Kitale</p><h2 className="mt-4 max-w-xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">You do not have to walk the journey alone.</h2><p className="mt-6 max-w-xl text-base leading-8 text-[var(--muted-ink)]">We are a local church family in Kitale, Kenya, helping people meet Jesus, grow in faith, build meaningful relationships, and serve our community with compassion.</p><div className="mt-7 flex flex-wrap gap-5"><Link href="/about" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[.12em] text-[var(--red)]">Our story <ArrowRight size={16} /></Link><Link href="/contact" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[.12em] text-[var(--ink)]">Ask a question <ArrowRight size={16} /></Link></div></div></Reveal><Reveal delay={.12}><div className="grid grid-cols-2 gap-4"><div className="relative mt-10 h-64 overflow-hidden rounded bg-[var(--black)] sm:h-80"><Image src="/citamKitale2.jpg" alt="CITAM Kitale congregation" fill className="object-cover" sizes="50vw" /></div><div className="relative h-64 overflow-hidden rounded bg-[var(--red)] sm:h-80"><Image src="/Guest1.jpg" alt="CITAM Kitale worship" fill className="object-cover mix-blend-multiply opacity-90" sizes="50vw" /></div></div></Reveal></div></section>
 
-        {/* Ministries */}
-        <Section
-          title={<>Our <span className="text-red-600">Ministries</span></>}
-          description="Discover how you can get involved, serve others, and grow in your faith through our various ministries."
-          bgClass="bg-white"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {ministries.map((ministry) => (
-              <MinistryCard
-                key={ministry.id}
-                ministry={ministry}
-                className="shadow-sm hover:shadow-md transition-shadow duration-300"
-              />
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2">
-              <Link href="/ministries">Explore All Ministries</Link>
-            </Button>
-          </div>
-        </Section>
+    <section className="section-pad bg-[var(--sand)]"><div className="container-shell"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><SectionHeading eyebrow="Find your place" title="Ministries for every season." description="Whether you are raising children, navigating young adulthood, building a marriage, or looking for a place to serve, there is a next step for you." /><Link href="/ministries" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[.12em] text-[var(--red)]">View ministries <ArrowRight size={16} /></Link></div><div className="mt-10 grid gap-5 md:grid-cols-3">{ministries.map((ministry, index) => <Reveal key={ministry.id} delay={index*.08}><Link href={`/ministries#${ministry.anchor}`} className="editorial-card image-zoom group block overflow-hidden rounded"><div className="relative h-52 overflow-hidden"><Image src={ministry.image} alt={ministry.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" /><span className="absolute left-4 top-4 bg-[var(--red)] px-3 py-2 text-xs font-black text-white">0{index+1}</span></div><div className="p-5"><h3 className="text-xl font-black">{ministry.title}</h3><p className="mt-2 text-sm leading-6 text-[var(--muted-ink)]">{ministry.description}</p><span className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[.1em] text-[var(--red)]">Explore <ArrowRight size={14} /></span></div></Link></Reveal>)}</div></div></section>
 
-        <TestimonialSection />
-        <NewsletterSignup />
-      </main>
+    <section className="section-pad bg-[var(--cream)]"><div className="container-shell grid gap-10 lg:grid-cols-[.75fr_1.25fr]"><Reveal><SectionHeading eyebrow="This week at CITAM Kitale" title="Make time for worship and community." description="Keep the important things easy to find. Check what is happening and plan your next visit." /><Link href="/events" className="mt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[.12em] text-[var(--red)]">See all gatherings <ArrowRight size={16} /></Link></Reveal><div className="grid gap-3">{upcomingEvents.map((event, index) => <Reveal key={event.id} delay={index*.07}><Link href={`/register/${event.slug}`} className="group flex flex-col gap-3 border-t border-[var(--line)] py-5 sm:flex-row sm:items-center sm:justify-between"><div><p className="eyebrow">{event.date}</p><h3 className="mt-1 text-xl font-black group-hover:text-[var(--red)]">{event.title}</h3><p className="mt-1 text-sm text-[var(--muted-ink)]">{event.time} · {event.location}</p></div><ArrowRight className="text-[var(--red)] transition group-hover:translate-x-1" /></Link></Reveal>)}</div></div></section>
 
-      {/* ✅ Structured data inside the fragment, after <main> — correct placement */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(churchStructuredData) }}
-      />
-    </>
-  );
+    <section className="bg-[var(--black)] py-16 text-white"><div className="container-shell grid gap-8 md:grid-cols-[1fr_auto] md:items-center"><div><p className="eyebrow text-[var(--gold)]">Generosity in action</p><h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">Give to what God is doing in Kitale.</h2><p className="mt-4 max-w-2xl text-white/70">Support worship, discipleship, children and youth ministry, and practical care for our neighbours.</p></div><Link href="/give" className="inline-flex items-center justify-center gap-2 rounded bg-[var(--red)] px-6 py-4 text-xs font-black uppercase tracking-[.14em] text-white hover:bg-[var(--red-dark)]">Give via M-Pesa <ArrowRight size={16} /></Link></div></section>
+
+    <section className="section-pad bg-[var(--cream)]"><div className="container-shell"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><SectionHeading eyebrow="Watch and listen" title="A word for the week." description="Biblical teaching to help you follow Jesus in the ordinary rhythms of Kenyan life." /><Link href="/sermons" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[.12em] text-[var(--red)]">All sermons <ArrowRight size={16} /></Link></div><div className="mt-10 grid gap-5 md:grid-cols-3">{latestSermons.map((sermon, index) => <Reveal key={sermon.id} delay={index*.08}><Link href={sermon.link} className="editorial-card image-zoom group block overflow-hidden rounded"><div className="relative h-52"><Image src={sermon.image} alt={sermon.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" /><span className="absolute right-4 top-4 rounded-full bg-white p-3 text-[var(--red)]"><Play size={16} fill="currentColor" /></span></div><div className="p-5"><p className="eyebrow">{sermon.date}</p><h3 className="mt-2 text-xl font-black group-hover:text-[var(--red)]">{sermon.title}</h3><p className="mt-2 text-sm leading-6 text-[var(--muted-ink)]">{sermon.description}</p></div></Link></Reveal>)}</div></div></section>
+
+    <section className="border-t border-[var(--line)] bg-[var(--sand)] py-16"><div className="container-shell grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center"><div><p className="eyebrow">A church family in Kitale</p><h2 className="mt-3 text-4xl font-black">Come with a question. Leave with a next step.</h2><p className="mt-4 max-w-lg leading-7 text-[var(--muted-ink)]">Need prayer, directions, or a conversation with a pastor? We are ready to listen.</p><Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded bg-[var(--red)] px-5 py-3 text-xs font-black uppercase tracking-[.12em] text-white">Contact CITAM Kitale <ArrowRight size={15} /></Link></div><div className="grid gap-4 sm:grid-cols-3">{testimonials.map((item) => <blockquote key={item.id} className="rounded border border-[var(--line)] bg-[var(--paper)] p-5"><p className="text-sm leading-6">“{item.quote}”</p><cite className="mt-4 block text-xs font-black not-italic text-[var(--red)]">{item.author}</cite><span className="mt-1 block text-xs text-[var(--muted-ink)]">{item.role}</span></blockquote>)}</div></div></section>
+  </main>;
 }

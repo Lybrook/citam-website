@@ -55,17 +55,17 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <div className="space-y-3">
           <div className="flex items-center text-sm">
             <Calendar className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800">{date}</span>
+            <span className="text-[var(--ink)]">{date}</span>
           </div>
 
           <div className="flex items-center text-sm">
             <Clock className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800">{time}</span>
+            <span className="text-[var(--ink)]">{time}</span>
           </div>
 
           <div className="flex items-center text-sm">
             <MapPin className="w-4 h-4 mr-2 text-red-700" />
-            <span className="text-gray-800 line-clamp-1" title={location}>
+            <span className="text-[var(--ink)] line-clamp-1" title={location}>
               {location}
             </span>
           </div>
@@ -89,7 +89,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <Button
           asChild
           variant="outline"
-          className="flex-1 border-red-700 text-red-700 hover:bg-red-50 hover:text-red-800"
+          className="flex-1 border-red-700 text-red-700 hover:bg-[var(--sand)] hover:text-red-800"
         >
           <Link
             href="/contact#calendar"
@@ -102,7 +102,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <Button
           variant="ghost"
           size="icon"
-          className="hidden sm:flex text-red-700 hover:bg-red-50 hover:text-red-800"
+          className="hidden sm:flex text-red-700 hover:bg-[var(--sand)] hover:text-red-800"
           aria-label={`Share ${title} event`}
           onClick={() => {
             if (navigator.share) {
