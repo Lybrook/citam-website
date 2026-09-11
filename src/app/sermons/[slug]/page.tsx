@@ -1,29 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { latestSermons } from "@/src/app/data/sermons";
-import { Button } from "@/src/components/ui/button";
-
-export function generateStaticParams() {
-  return latestSermons.map((sermon) => ({ slug: sermon.slug }));
-}
-
-export default async function SermonDetail({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const sermon = latestSermons.find((item) => item.slug === slug);
-  if (!sermon) notFound();
-
-  return (
-    <main className="min-h-screen bg-background px-4 pb-20 pt-32">
-      <article className="container mx-auto max-w-3xl">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">CITAM Kitale Sermon</p>
-        <h1 className="text-4xl font-bold tracking-tight md:text-6xl">{sermon.title}</h1>
-        <p className="mt-5 text-muted-foreground">{sermon.speaker} · {sermon.date}</p>
-        <div className="mt-10 rounded-3xl border border-border bg-card p-8 shadow-sm md:p-12">
-          <p className="text-lg leading-8 text-card-foreground">{sermon.description}</p>
-          <p className="mt-8 rounded-xl bg-primary/10 p-5 text-sm text-foreground">A full audio or video recording can be connected to this page through the church media library when available.</p>
-          <Button asChild className="mt-8"><Link href="/sermons">Back to sermons</Link></Button>
-        </div>
-      </article>
-    </main>
-  );
-}
+import { ArrowLeft, Play } from "lucide-react";
+import { latestSermons } from "../../data/sermons";
+import { Reveal } from "../../../components/site/reveal";
+export function generateStaticParams() { return latestSermons.map((sermon) => ({ slug: sermon.slug })); }
+export default async function SermonDetail({ params }: { params: Promise<{ slug: string }> }) { const { slug } = await params; const sermon = latestSermons.find((item) => item.slug === slug); if (!sermon) notFound(); return <main className="bg-[var(--cream)]"><section className="bg-[var(--navy)] pb-28 pt-40 text-white"><div className="container-shell max-w-4xl"><Reveal><Link href="/sermons" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[.14em] text-[var(--gold)]"><ArrowLeft size={15} /> All teachings</Link><p className="eyebrow mt-12 text-[var(--gold)]">{sermon.date} · {sermon.speaker}</p><h1 className="display-heading mt-5 text-6xl leading-[.9] sm:text-8xl">{sermon.title}</h1></Reveal></div></section><section className="-mt-16 pb-24"><div className="container-shell max-w-4xl"><Reveal><div className="grid overflow-hidden rounded-[2rem] bg-white shadow-2xl md:grid-cols-[.8fr_1.2fr]"><div className="relative min-h-72"><Image src={sermon.image} alt={sermon.title} fill className="object-cover" /></div><div className="p-8 md:p-12"><span className="mb-6 inline-flex rounded-full bg-[var(--red)] p-3 text-white"><Play size={18} fill="currentColor" /></span><p className="text-xl leading-9">{sermon.description}</p><p className="mt-8 rounded-xl bg-[var(--cream)] p-5 text-sm leading-6 text-[var(--muted-ink)]">A full audio or video recording can be connected to this message through the church media library when available.</p></div></div></Reveal></div></section></main>; }
