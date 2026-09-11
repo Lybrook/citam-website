@@ -12,7 +12,7 @@ interface Testimonial {
 
 const TestimonialCard: React.FC<Testimonial> = ({ quote, author, role, image }) => {
   return (
-    <Card className="max-w-md bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300">
+    <Card className="max-w-md bg-[var(--paper)] shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300">
       <CardContent className="flex flex-col items-center p-6">
         <Avatar className="mb-4 ring-2 ring-red-500">
           <Image
@@ -23,12 +23,12 @@ const TestimonialCard: React.FC<Testimonial> = ({ quote, author, role, image }) 
             className="rounded-full object-cover"
           />
         </Avatar>
-        <blockquote className="text-black italic text-lg mb-4">
+        <blockquote className="text-[var(--ink)] italic text-lg mb-4">
           <p className="relative before:content-['\\201C'] before:text-red-500 before:text-4xl before:absolute before:-left-4 before:-top-2 after:content-['\\201D'] after:text-red-500 after:text-4xl after:absolute after:-right-4 after:-bottom-2">
             {quote}
           </p>
-          <footer className="text-red-600 font-semibold text-lg">{author}</footer>
-          <cite className="text-gray-700 text-sm">{role}</cite>
+          <footer className="text-[var(--red)] font-semibold text-lg">{author}</footer>
+          <cite className="text-[var(--ink)] text-sm">{role}</cite>
         </blockquote>
       </CardContent>
     </Card>

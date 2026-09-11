@@ -14,7 +14,7 @@ interface MinistryCardProps {
 
 const MinistryCard: React.FC<MinistryCardProps> = ({ ministry }) => {
   return (
-    <Card className="group bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-red-600">
+    <Card className="group bg-[var(--paper)] dark:bg-[var(--paper)] rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-[var(--red)]">
       <div className="relative aspect-video">
         <Image
           src={ministry.image}
@@ -27,14 +27,14 @@ const MinistryCard: React.FC<MinistryCardProps> = ({ ministry }) => {
         />
       </div>
       <CardContent className="p-5 space-y-3">
-        <h3 className="text-xl font-bold text-black dark:text-white">{ministry.title}</h3>
-        <p className="text-gray-700 dark:text-gray-300 line-clamp-3">{ministry.description}</p>
+        <h3 className="text-xl font-bold text-[var(--ink)] dark:text-[var(--ink)]">{ministry.title}</h3>
+        <p className="text-[var(--ink)] dark:text-[var(--muted-ink)] line-clamp-3">{ministry.description}</p>
       </CardContent>
       <CardFooter className="p-5 pt-0">
         <Button
           variant="outline"
           asChild
-          className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200"
+          className="w-full border-[var(--red)] text-[var(--red)] hover:bg-[var(--red)] hover:text-white transition-colors duration-200"
           aria-label={`Learn more about ${ministry.title} ministry`}
         >
           <Link href={`/ministries#${ministry.anchor}`} className="flex items-center justify-center space-x-1">
