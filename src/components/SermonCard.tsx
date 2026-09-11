@@ -45,7 +45,7 @@ const SermonCard: React.FC<{ sermon: Sermon; className?: string }> = ({
       {/* ✅ Consistent image sizing — wrapper controls dimensions, fill covers it */}
       <div className="relative w-full h-48">
         <Image
-          src={sermon.image || "/placeholder.jpg"}
+          src={sermon.image || "/citamKitale.jpg"}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
