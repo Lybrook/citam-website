@@ -28,7 +28,7 @@ const DonationForm: React.FC = () => {
         <input
           type='number'
           id='amount'
-          className='w-full p-2 border border-gray-300 rounded'
+          className='w-full p-2 border border-[var(--line)] rounded'
           required
           value={amount || ""}
           onChange={(e) => setAmount(Number(e.target.value))}
@@ -41,7 +41,7 @@ const DonationForm: React.FC = () => {
         <input
           type='text'
           id='name'
-          className='w-full p-2 border border-gray-300 rounded'
+          className='w-full p-2 border border-[var(--line)] rounded'
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -54,7 +54,7 @@ const DonationForm: React.FC = () => {
         <input
           type='email'
           id='email'
-          className='w-full p-2 border border-gray-300 rounded'
+          className='w-full p-2 border border-[var(--line)] rounded'
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}

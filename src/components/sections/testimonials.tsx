@@ -4,7 +4,7 @@ import React from 'react';
 
 const TestimonialSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-red-600 text-white">
+    <section className="py-16 md:py-24 bg-[var(--red)] text-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-10 text-center">Testimonials</h2>
         <div className="max-w-4xl mx-auto">
