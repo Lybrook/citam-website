@@ -13,7 +13,7 @@ const LeadershipCard: React.FC<Leadership> = ({ name, title, image, bio }) => {
     <div className="flex flex-col items-center">
       <Image src={image} alt={name} width={64} height={64} className="rounded-full mb-2" />
       <h3 className="font-semibold">{name}</h3>
-      <p className="text-sm text-gray-500">{title}</p>
+      <p className="text-sm text-[var(--muted-ink)]">{title}</p>
       <p className="mt-2">{bio}</p>
     </div>
   );

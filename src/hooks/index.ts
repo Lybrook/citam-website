@@ -20,8 +20,6 @@ export const useScroll = () => {
       window.addEventListener("scroll", handleScroll);
     }
 
-    setScrolled(window.scrollY > 10);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
