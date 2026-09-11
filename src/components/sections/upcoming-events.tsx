@@ -19,20 +19,20 @@ interface Event {
 const UpcomingEvents: React.FC<{ events: Event[] }> = ({ events }) => {
   if (!events || events.length === 0) {
     return (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-[var(--paper)]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-3 text-center text-black">Upcoming <span className="text-red-600">Events</span></h2>
-          <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">No upcoming events found.</p>
+          <h2 className="text-3xl font-bold mb-3 text-center text-[var(--ink)]">Upcoming <span className="text-[var(--red)]">Events</span></h2>
+          <p className="text-lg text-[var(--muted-ink)] text-center mb-10 max-w-2xl mx-auto">No upcoming events found.</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-[var(--paper)]">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-3 text-center text-black">Upcoming <span className="text-red-600">Events</span></h2>
-        <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Join us for our upcoming events and be part of our community.</p>
+        <h2 className="text-3xl font-bold mb-3 text-center text-[var(--ink)]">Upcoming <span className="text-[var(--red)]">Events</span></h2>
+        <p className="text-lg text-[var(--muted-ink)] text-center mb-10 max-w-2xl mx-auto">Join us for our upcoming events and be part of our community.</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
@@ -41,7 +41,7 @@ const UpcomingEvents: React.FC<{ events: Event[] }> = ({ events }) => {
         </div>
         
         <div className="text-center mt-12">
-          <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
+          <Button asChild className="bg-[var(--red)] hover:bg-[var(--red-dark)] text-white">
             <Link href="/events">View All Events</Link>
           </Button>
         </div>
