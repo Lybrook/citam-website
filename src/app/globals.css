@@ -53,8 +53,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { min-width: 320px; background: var(--cream); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { min-width: 320px; overflow-x: clip; background: var(--cream); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 ::selection { background: var(--red); color: #fff; }
 img { max-width: 100%; }
 a, button { -webkit-tap-highlight-color: transparent; }

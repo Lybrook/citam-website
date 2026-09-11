@@ -7,7 +7,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { useTheme } from "next-themes";
 
-const navItems = [["Visit", "/events"], ["About", "/about"], ["Ministries", "/ministries"], ["Sermons", "/sermons"], ["Gallery", "/gallery"], ["Contact", "/contact"]];
+const navItems = [["Home", "/"], ["Visit", "/events"], ["About", "/about"], ["Ministries", "/ministries"], ["Sermons", "/sermons"], ["Gallery", "/gallery"], ["Contact", "/contact"]];
 
 export default function Header() {
   const pathname = usePathname();
